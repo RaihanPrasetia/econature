@@ -3,55 +3,35 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Pengaduans', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
+      point: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
-      jenis_kelamin: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      tanggal_lahir: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
-      pekerjaan: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      no_handphone: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        unique: true,
-      },
-      alamat: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      email: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      role: {
-        type: Sequelize.ENUM('admin', 'user'),
-        allowNull: false,
-        defaultValue: 'user', // Menambahkan default value untuk kolom role
+
       },
       image_path: {
         type: Sequelize.STRING,
         allowNull: true,
+      },
+      createdBy: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',  // Merujuk ke tabel Users di database
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
@@ -71,6 +51,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Pengaduans');
   }
 };

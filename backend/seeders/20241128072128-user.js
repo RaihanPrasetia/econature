@@ -1,5 +1,5 @@
 'use strict';
-const bcrypt=require('bcrypt')
+const bcrypt = require('bcrypt')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -8,20 +8,28 @@ module.exports = {
     // Tambahkan data ke tabel
     await queryInterface.bulkInsert('Users', [
       {
-        name: 'sholeh hidayat',
-        email: 'hidayatsholeh54@gmail.com',
+        name: 'Admin',
+        email: 'admin@example.com',
         password: hashedPassword1,
         createdAt: new Date(),
         updatedAt: new Date(),
-        role:'user'
+        role: 'admin'
       },
       {
-        name: 'asnia',
-        email: 'asnia@example.com',
+        name: 'User 1',
+        email: 'user1@example.com',
         password: hashedPassword2,
         createdAt: new Date(),
         updatedAt: new Date(),
-        role:'admin'
+        role: 'user'
+      },
+      {
+        name: 'User 2',
+        email: 'user2@example.com',
+        password: hashedPassword2,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        role: 'user'
       },
     ]);
   },
