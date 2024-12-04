@@ -1,7 +1,7 @@
 const multer = require('multer');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const {User} = require('../associations');
+const { User } = require('../associations');
 require('dotenv').config();
 
 
@@ -10,12 +10,10 @@ const register = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // ... Validation checks ...
 
-    // Hash the password
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create the user
     const newUser = await User.create({
       name,
       email,
@@ -75,7 +73,7 @@ const login = async (req, res) => {
     res.status(200).json({
       message: 'Login successful.',
       token,
-        user
+      user
     });
   } catch (error) {
     console.error('Error during login:', error);
@@ -134,4 +132,4 @@ const verifyToken = (req, res, next) => {
 
 
 
-module.exports = { register, login, verifyToken, cekemail };
+module.exports = { register, login, verifyToken, cekemail };
