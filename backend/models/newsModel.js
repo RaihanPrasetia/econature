@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const User = require('./userModel');
 
-const News = sequelize.define('News', {
+const News = sequelize.define('newses', {
     id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,9 +17,17 @@ const News = sequelize.define('News', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    quotes: {
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    avatar: {
         type: DataTypes.STRING,
         allowNull: true,
+    },
+    message: {
+        type: DataTypes.TEXT,
+        allowNull: false,
     },
     image_path: {
         type: DataTypes.STRING,

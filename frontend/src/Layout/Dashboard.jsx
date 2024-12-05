@@ -3,7 +3,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import TentangKami from '../components/TentangKami'
 import Kontak from '../components/Kontak'
-import { Berita, Berita1, Berita2, Berita3, Berita4, Berita5, Berita6, DaftarPengaduan, Donasi, DonasiPage, Edukasi, Edukasi1, Edukasi2, Edukasi3, Edukasi4, Edukasi5, Edukasi6, KebijakanPrivasi, LaporanPengguna1, LaporanPengguna2, LaporanPengguna3, LaporanPengguna4, LaporanPengguna5, LaporanPengguna6, Pengaduan, Poin, Relawan } from '../components/features'
+import { Berita, DaftarPengaduan, Donasi, DonasiPage, Edukasi, KebijakanPrivasi, LaporanPengguna1, LaporanPengguna2, LaporanPengguna3, LaporanPengguna4, LaporanPengguna5, LaporanPengguna6, Pengaduan, Poin, Relawan } from '../components/features'
 import PembayaranDonasi from '../components/features/PembayaranDonasi'
 import Home from '../components/Home'
 import Error from '../components/Error'
@@ -16,6 +16,7 @@ import ProfileEdit from '../components/ProfileEdit'
 import DaftarRelawan from '../components/features/DaftarRelawan'
 import DetailDonasi from '../components/features/DetailDonasi'
 import DetailEdukasi from '../components/features/DetailEdukasi'
+import DetailBerita from '../components/features/DetailBerita'
 
 
 
@@ -37,12 +38,7 @@ function Dashboard() {
                 <Route path="/PembayaranDonasiDetail" element={<PembayaranDonasiDetail />} />
                 <Route path="/Edukasi" element={<Edukasi />} />
                 <Route path="/Edukasi/:id" element={<DetailEdukasi />} />
-                <Route path="/Edukasi1" element={<Edukasi1 />} />
-                <Route path="/Edukasi2" element={<Edukasi2 />} />
-                <Route path="/Edukasi3" element={<Edukasi3 />} />
-                <Route path="/Edukasi4" element={<Edukasi4 />} />
-                <Route path="/Edukasi5" element={<Edukasi5 />} />
-                <Route path="/Edukasi6" element={<Edukasi6 />} />
+
                 <Route path="/Relawan" element={<Relawan />} />
                 <Route path="/Daftar-Relawan" element={<DaftarRelawan />} />
                 <Route path="/Pengaduan" element={<Pengaduan />} />
@@ -59,12 +55,8 @@ function Dashboard() {
                 <Route path="/PoinTukar" element={<PoinTukar />} />
                 <Route path="/poin-tukar-detail" element={<PoinTukarDetail />} />
                 <Route path="/Berita" element={<Berita />} />
-                <Route path="/Berita1" element={<Berita1 />} />
-                <Route path="/Berita2" element={<Berita2 />} />
-                <Route path="/Berita3" element={<Berita3 />} />
-                <Route path="/Berita4" element={<Berita4 />} />
-                <Route path="/Berita5" element={<Berita5 />} />
-                <Route path="/Berita6" element={<Berita6 />} />
+                <Route path="/Berita/:id" element={<DetailBerita />} />
+
 
             </Routes>
         </>

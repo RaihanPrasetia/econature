@@ -19,9 +19,17 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      quotes: {
+      avatar: {
         type: Sequelize.STRING,
         allowNull: true,
+      },
+      username: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      message: {
+        type: Sequelize.TEXT,
+        allowNull: false,
       },
       image_path: {
         type: Sequelize.STRING,

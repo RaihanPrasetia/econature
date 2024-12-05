@@ -7,8 +7,9 @@ module.exports = {
       {
         title: 'Climate Change Awareness Campaign',
         description: 'A comprehensive campaign to raise awareness about climate change and its effects.',
-        quotes: 'Together, we can save our planet.',
         image_path: '/images/climate-awareness.jpg',
+        username: 'Mulya Love Nala',
+        message: 'banggg donasi banggg buat modal nikah',
         createdBy: 3, // Sesuaikan dengan ID pengguna di tabel Users
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -16,7 +17,8 @@ module.exports = {
       {
         title: 'Local Community Cleanup Drive',
         description: 'An initiative to clean up local neighborhoods and promote proper waste management.',
-        quotes: 'Cleanliness is next to godliness.',
+        username: 'Mulya Love Nala',
+        message: 'banggg donasi banggg buat modal nikah',
         image_path: '/images/community-cleanup.jpg',
         createdBy: 2, // Sesuaikan dengan ID pengguna di tabel Users
         createdAt: new Date(),
@@ -25,7 +27,8 @@ module.exports = {
       {
         title: 'Recycling Awareness Workshop',
         description: 'A workshop to educate the public about the importance of recycling.',
-        quotes: 'Reduce, reuse, recycle.',
+        username: 'Mulya Love Nala',
+        message: 'banggg donasi banggg buat modal nikah',
         image_path: '/images/recycling-workshop.jpg',
         createdBy: 3, // Sesuaikan dengan ID pengguna di tabel Users
         createdAt: new Date(),

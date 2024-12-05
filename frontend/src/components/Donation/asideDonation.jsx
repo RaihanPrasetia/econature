@@ -50,7 +50,7 @@ const AsideDonatin = () => {
                 <h3 className="text-2xl font-bold mb-4 mt-6">Ayo Mulai Berdonasi</h3>
                 <div className="bg-white border rounded-lg overflow-hidden mb-6">
                     <img
-                        src={donationData.imagePath || "/images/d6.png"} // Menggunakan gambar dari API atau gambar default
+                        src={`/images/${donationData.imagePath}` || "/images/d6.png"} // Menggunakan gambar dari API atau gambar default
                         alt="Donation"
                         className="w-full mb-4"
                     />

@@ -28,7 +28,6 @@ const complaints = [
   }
 ];
 
-
 const news = [
 
   {

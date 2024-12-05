@@ -70,7 +70,7 @@ const DetailDonasi = () => {
                     <div className="md:col-span-2">
                         <div className="mb-12">
                             <img
-                                src={imagePath || "/images/d4.png"} // Tampilkan gambar default jika null
+                                src={`/images/${imagePath}` || "/images/d4.png"} // Tampilkan gambar default jika null
                                 alt={title}
                                 className="w-full rounded-lg mb-6"
                             />

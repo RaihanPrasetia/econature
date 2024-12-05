@@ -17,6 +17,8 @@ Education.belongsTo(User, { foreignKey: 'createdBy', as: 'creator' });
 Education.hasMany(Comment, { foreignKey: 'education_id', as: 'comments' });
 Comment.belongsTo(User, { foreignKey: 'createdBy', as: 'owner' });
 Relawan.belongsTo(User, { foreignKey: 'createdBy', as: 'creator' });
+News.belongsTo(User, { foreignKey: 'createdBy', as: 'creator' });
+News.hasMany(Comment, { foreignKey: 'news_id', as: 'comments' });
 
 
 module.exports = {
