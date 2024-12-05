@@ -11,6 +11,10 @@ const Bank = sequelize.define('Bank', {
         autoIncrement: true,
         allowNull: false,
     },
+    image_path: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     an: {
         type: DataTypes.STRING,
         allowNull: false,

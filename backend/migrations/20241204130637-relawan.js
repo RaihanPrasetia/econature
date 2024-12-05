@@ -22,7 +22,6 @@ module.exports = {
       no_handphone: {
         type: Sequelize.STRING,
         allowNull: true,
-        unique: true,
       },
       alamat: {
         type: Sequelize.STRING,

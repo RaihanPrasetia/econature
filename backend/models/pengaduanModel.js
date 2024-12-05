@@ -21,14 +21,30 @@ const Pengaduan = sequelize.define('Pengaduan', {
         type: DataTypes.STRING,
         allowNull: true,
     },
+    image_path: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    provinsi: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     no_handphone: {
         type: DataTypes.STRING,
         allowNull: true,
-        unique: true,
     },
     alamat: {
         type: DataTypes.STRING,
         allowNull: true,
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+
     },
     createdBy: {
         type: DataTypes.INTEGER,

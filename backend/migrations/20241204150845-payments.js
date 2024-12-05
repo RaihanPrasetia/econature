@@ -33,6 +33,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'Diproses'
+      },
+      image_path: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      message: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       bank_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -53,6 +66,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+
       createdBy: {
         type: Sequelize.INTEGER,
         allowNull: false,

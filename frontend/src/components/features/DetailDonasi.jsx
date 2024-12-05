@@ -121,7 +121,7 @@ const DetailDonasi = () => {
                                             50rb
                                         </button>
                                         <button className="px-6 py-2 bg-[#3B9E3F] text-white rounded-lg hover:bg-green-700 text-sm font-medium">
-                                            <a href="/PembayaranDonasi">DONASI</a>
+                                            <Link to={`/PembayaranDonasi/${id}`}>DONASI</Link>
                                         </button>
                                     </div>
                                 </div>

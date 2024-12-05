@@ -76,10 +76,15 @@ const AsideDonatin = () => {
                         <span className="text-sm text-gray-600">{donationData.donationCount} Pendukung</span>
                     </div>
                     <div className="w-[363px] bg-gray-200 rounded-full h-2 mb-4 ml-4">
-                        <div className="bg-[#3B9E3F] h-2 rounded-full" style={{ width: `${(donationData.donationProgress / donationData.target) * 100}%` }}></div>
+                        <div
+                            className="bg-[#3B9E3F] h-2 rounded-full"
+                            style={{ width: `${donationData.donationProgress}%` }}
+                        ></div>
                     </div>
                     <div className="justify-between text-center text-sm text-gray-600 grid md:grid-cols-3 font-bold mb-4">
-                        <div>{Math.round((donationData.donationProgress / donationData.target) * 100)}% <br /> Didanai</div>
+                        <div className="w-full items-center justify-center text-center">
+                            {donationData.donationProgress}% <br /> Didanai
+                        </div>
                         <div className='mr-4'>Rp {donationData.totalDonations.toLocaleString()} <br /> Terkumpul</div>
                         <div className='ml-2'>Rp {donationData.target.toLocaleString()} <br /> Diperlukan</div>
                     </div>

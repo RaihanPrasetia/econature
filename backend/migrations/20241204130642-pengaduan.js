@@ -25,7 +25,22 @@ module.exports = {
       no_handphone: {
         type: Sequelize.STRING,
         allowNull: true,
-        unique: true,
+      },
+      provinsi: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      image_path: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       alamat: {
         type: Sequelize.STRING,
