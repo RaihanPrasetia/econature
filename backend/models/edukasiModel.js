@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const User = require('./userModel');
 
-const Education = sequelize.define('Education', {
+const Education = sequelize.define('educations', {
     id: {
         allowNull: false,
         autoIncrement: true,

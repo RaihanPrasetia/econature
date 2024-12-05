@@ -21,6 +21,32 @@ const Donation = sequelize.define('Donation', {
         allowNull: false,
 
     },
+    donation_count: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+    },
+    target: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+    },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    message: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    image_path: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    avatar: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     createdBy: {
         type: DataTypes.INTEGER,
         allowNull: false,

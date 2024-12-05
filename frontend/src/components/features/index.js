@@ -1,10 +1,4 @@
 export { default as Donasi } from './Donasi';
-export { default as Donasi1 } from './Donasi1';
-export { default as Donasi2 } from './Donasi2';
-export { default as Donasi3 } from './Donasi3';
-export { default as Donasi4 } from './Donasi4';
-export { default as Donasi5 } from './Donasi5';
-export { default as Donasi6 } from './Donasi6';
 export { default as DonasiPage } from './DonasiPage';
 export { default as Edukasi } from './Edukasi';
 export { default as Edukasi1 } from './Edukasi1';

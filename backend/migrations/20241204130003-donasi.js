@@ -21,6 +21,32 @@ module.exports = {
         allowNull: false,
 
       },
+      donation_count: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+      },
+      target: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+      },
+      image_path: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      avatar: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      username: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      message: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       createdBy: {
         type: Sequelize.INTEGER,
         allowNull: false,

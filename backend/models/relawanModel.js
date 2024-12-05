@@ -16,6 +16,12 @@ const Relawan = sequelize.define('Relawan', {
     email: {
         type: DataTypes.STRING,
         allowNull: true,
+        unique: true,
+    },
+    no_handphone: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique: true,
     },
     alamat: {
         type: DataTypes.STRING,
