@@ -6,14 +6,16 @@ const fs = require('fs');
 // Konfigurasi Multer untuk upload gambar
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const dir = path.join(__dirname, '../../../frontend/public/images/berita');
+        const dir = path.join(__dirname, '../../frontend/public/images/newses');
+
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }
+
         cb(null, dir);
     },
     filename: (req, file, cb) => {
-        const uniqueSuffix = Math.round(Math.random() * 1e9);
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
         const fileExt = path.extname(file.originalname).toLowerCase();
         cb(null, `${uniqueSuffix}${fileExt}`);
     },
@@ -33,28 +35,22 @@ const upload = multer({
     },
 });
 
-
 // **Create News**
 const createNews = async (req, res) => {
-    const { title, description, username, message, } = req.body;
-    const userId = req.userId;
+    const { title, description, quotes } = req.body;
     try {
         const newNews = await News.create({
             title,
             description,
-            username,
-            message,
-            createdBy: userId,
-            image_path: req.files?.image_path?.[0]?.filename || null,
-            avatar: req.files?.avatar?.[0]?.filename || null,
+            quotes,
+            createdBy: req.user.id, // Pastikan middleware autentikasi tersedia
+            image_path: req.file ? req.file.filename : null,
         });
-
         res.status(201).json({ message: 'News created successfully', news: newNews });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
-
 
 // **Get All News**
 const getNewses = async (req, res) => {
@@ -120,29 +116,20 @@ const getNewsById = async (req, res) => {
     }
 };
 
-
+// **Update News**
 const updateNews = async (req, res) => {
     const { id } = req.params;
-    const { title, description, username, message } = req.body;
-
+    const { title, description, quotes } = req.body;
     try {
         const news = await News.findByPk(id);
-
         if (!news) {
             return res.status(404).json({ message: 'News not found' });
         }
 
-        // Update fields jika ada perubahan
-        news.title = title || news.title;
-        news.description = description || news.description;
-        news.username = username || news.username;
-        news.message = message || news.message;
+        if (req.file) {
+            const newImagePath = req.file.filename;
+            const dir = path.join(__dirname, '../../frontend/public/images/newses');
 
-        // Jika file baru di-upload
-        if (req.files) {
-            const dir = path.join(__dirname, '../../../frontend/public/images/newses');
-
-            // Cek dan hapus gambar lama jika ada
             if (news.image_path) {
                 const oldImagePath = path.join(dir, news.image_path);
                 if (fs.existsSync(oldImagePath)) {
@@ -150,33 +137,19 @@ const updateNews = async (req, res) => {
                 }
             }
 
-            // Jika ada file baru untuk gambar
-            if (req.files.image_path) {
-                news.image_path = req.files.image_path[0].filename; // Update dengan file baru
-            }
-
-            // Cek dan hapus avatar lama jika ada
-            if (news.avatar) {
-                const oldAvatarPath = path.join(dir, news.avatar);
-                if (fs.existsSync(oldAvatarPath)) {
-                    fs.unlinkSync(oldAvatarPath);
-                }
-            }
-
-            // Jika ada file baru untuk avatar
-            if (req.files.avatar) {
-                news.avatar = req.files.avatar[0].filename; // Update dengan file baru
-            }
+            news.image_path = newImagePath;
         }
 
-        // Simpan perubahan berita
+        news.title = title || news.title;
+        news.description = description || news.description;
+        news.quotes = quotes || news.quotes;
+
         await news.save();
         res.status(200).json({ message: 'News updated successfully', news });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
-
 
 // **Delete News**
 const deleteNews = async (req, res) => {

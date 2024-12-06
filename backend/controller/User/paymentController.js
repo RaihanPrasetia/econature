@@ -51,6 +51,15 @@ const createPayment = async (req, res) => {
             createdBy: userId,
             image_path,
         });
+
+        const donation = await Donation.findByPk(donation_id);
+        if (!donation) {
+            return res.status(404).json({ message: 'Donation not found' });
+        }
+
+        donation.donation_count += 1; // Tambahkan 1 ke donation_count
+        await donation.save();
+
         res.status(201).json({ message: 'Payment created successfully', payment: newPayment });
     } catch (error) {
         res.status(500).json({ message: error.message });

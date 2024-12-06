@@ -77,7 +77,7 @@ const Donasi = () => {
                       className="w-12 h-12 rounded-full overflow-hidden"
                     >
                       <img
-                        src={user.from.image_path || "/default_profile.jpg"}
+                        src={user.from.image_path ? `/images/profile/${user.from.image_path}` : "/default_profile.jpg"}
                         alt="user"
                         className="w-full h-full"
                       />

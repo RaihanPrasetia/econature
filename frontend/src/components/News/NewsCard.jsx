@@ -12,7 +12,7 @@ const NewsCard = ({ id, title, description, imagePath, createdAt, comments }) =>
         <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full w-[367px]">
             <div className="relative w-[367px] h-[242px]">
                 <img
-                    src={imagePath ? `/images/${imagePath}` : '/images/a1.png'}
+                    src={imagePath ? `/images/berita/${imagePath}` : '/images/a1.png'}
                     alt={title}
                     className="w-full h-full object-cover"
                 />

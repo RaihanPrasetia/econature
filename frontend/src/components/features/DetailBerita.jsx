@@ -119,7 +119,7 @@ const DetailBerita = () => {
                     <div className="md:col-span-2">
                         <div className="mb-8">
                             <img
-                                src={`/images/${newsData.imagePath}`} // Gambar berita
+                                src={`/images/berita/${newsData.imagePath}`} // Gambar berita
                                 alt={newsData.title}
                                 className="w-full rounded-lg mb-8"
                             />
@@ -144,7 +144,7 @@ const DetailBerita = () => {
                         <div className="bg-gray-50 p-6 rounded-lg mb-6">
                             <div className="flex items-center gap-4">
                                 <img
-                                    src={newsData.creator.imagePath ? `/images/${newsData.avatar}` : "/images/user.jpg"}
+                                    src={newsData.avatar ? `/images/berita/${newsData.avatar}` : "/images/user.jpg"}
                                     alt="Penulis"
                                     className="w-12 h-12 rounded-full object-cover"
                                 />

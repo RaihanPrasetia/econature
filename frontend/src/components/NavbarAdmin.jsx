@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaBookOpen, FaExclamationCircle, FaGift, FaHandHoldingHeart, FaNewspaper, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa'
+import { FaBookOpen, FaExclamationCircle, FaHandHoldingHeart, FaNewspaper, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa'
 import { useAuth } from '../context/AuthContext';
 
 
@@ -36,12 +36,6 @@ function NavbarAdmin() {
                 className="flex items-center gap-4 px-4 py-3 hover:bg-green-700 rounded-md"
             >
                 <FaExclamationCircle className="mr-3" /> Pengaduan
-            </a>
-            <a
-                href="/admin/poin-kupon-admin"
-                className="flex items-center gap-4 px-4 py-3 hover:bg-green-700 rounded-md"
-            >
-                <FaGift className="mr-3" /> Poin & Kupon
             </a>
             <a
                 href="/admin/berita-admin"
