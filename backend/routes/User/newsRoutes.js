@@ -5,7 +5,7 @@ const authenticateJWT = require('../../middlewares/authMiddleware');
 const { upload, createNews, deleteNews, getNewsById, getNewses, updateNews } = require('../../controller/User/newsController')
 
 // Mitra
-router.get('/newses', upload.none(), authenticateJWT, getNewses);
+router.get('/newses', upload.none(), getNewses);
 router.get('/newses/:id', upload.none(), authenticateJWT, getNewsById);
 router.post('/newses/create', upload.single('image_path'), authenticateJWT, createNews);
 router.put('/newses/update/:id', upload.single('image_path'), authenticateJWT, updateNews);

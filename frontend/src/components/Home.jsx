@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NewsService from "../service/NewsService";
 import PengaduanService from '../service/PengaduanService';
+import { useAuth } from '../context/AuthContext';
 
 
 const donationAmounts = [
@@ -12,7 +13,8 @@ const Home = () => {
   const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [pengaduans, setPengaduans] = useState([]); // State to store fetched data
+  const [pengaduans, setPengaduans] = useState([]);
+  const { isAuth } = useAuth(); // State to store fetched data
 
   useEffect(() => {
     const fetchPengaduans = async () => {
@@ -47,6 +49,22 @@ const Home = () => {
     fetchNews();
   }, []);
 
+  const handleNavigation = (id) => {
+    if (!isAuth) {
+      // Jika belum autentikasi, arahkan ke halaman login
+      return "/masuk";
+    }
+    // Jika sudah autentikasi, arahkan ke halaman pengaduan
+    return `/Pengaduan/${id}`;
+  };
+  const handleNavigationNews = (id) => {
+    if (!isAuth) {
+      // Jika belum autentikasi, arahkan ke halaman login
+      return "/masuk";
+    }
+    // Jika sudah autentikasi, arahkan ke halaman pengaduan
+    return `/Berita/${id}`;
+  };
 
   const handleToTop = () => {
     window.scrollTo(0, 0);
@@ -173,7 +191,7 @@ const Home = () => {
               <Link
                 key={pengaduan.id}
                 onClick={handleToTop}
-                to={`/Pengaduan/${pengaduan.id}`}
+                to={handleNavigation(pengaduan.id)}
                 className="block bg-gray-100 rounded-lg overflow-hidden transform shadow-sm transition-shadow duration-300 hover:scale-105 hover:shadow-xl"
               >
                 <div className="relative h-48 bg-cover bg-center">
@@ -222,7 +240,8 @@ const Home = () => {
           ) : newsData.length > 0 ? (
             <>
               <Link
-                to={`/Berita/${newsData[0].id}`}
+                onClick={handleToTop}
+                to={handleNavigationNews(newsData[0].id)}
                 className="block bg-gray-100 rounded-lg overflow-hidden transform shadow-sm transition-transform duration-300 hover:scale-105 hover:shadow-xl"
               >
                 <div className="col-span-1 lg:col-span-1">
@@ -266,7 +285,8 @@ const Home = () => {
                         <h3 className="font-bold mt-2 text-2xl">{item.title}</h3>
                       </div>
                       <Link
-                        to={`/Berita/${item.id}`}
+                        onClick={handleToTop}
+                        to={handleNavigationNews(item.id)}
                         className="text-[#3B9E3F] hover:text-green-700 text-sm flex items-center gap-1 font-semibold"
                       >
                         BACA SELENGKAPNYA
