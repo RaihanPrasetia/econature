@@ -13,13 +13,11 @@ import Error from './components/Error';
 import { useAuth } from './context/AuthContext';
 import Dashboard from './Layout/Dashboard';
 import AdminDashboard from './Layout/AdminDashboard';
-import { useNavigate } from 'react-router-dom';
 
 
 
 
 function AppRoutes() {
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const { isAuth, userRole } = useAuth();
   //console.log(isAuth, userRole);
@@ -27,11 +25,7 @@ function AppRoutes() {
   useEffect(() => {
     setIsLoading(false); // Set loading to false directly if not mitra
   }, [userRole]);
-  useEffect(() => {
-    if (userRole === 'admin') {
-      navigate('/admin/dashboard-admin');
-    }
-  }, [userRole, navigate]);
+
 
   if (isLoading) {
     return (
