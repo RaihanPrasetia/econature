@@ -117,7 +117,7 @@ const DetailEdukasi = () => {
                         {/* Gambar dan Deskripsi */}
                         <div className="mb-8">
                             <img
-                                src={`/images/${educationData.imagePath || "default.jpg"}`}
+                                src={`/images/educations/${educationData.imagePath || "default.jpg"}`}
                                 alt={educationData.title || "Gambar Edukasi"}
                                 className="w-full rounded-lg mb-8"
                             />

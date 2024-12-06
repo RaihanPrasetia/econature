@@ -6,7 +6,7 @@ const fs = require('fs');
 // Konfigurasi Multer untuk upload gambar
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const dir = path.join(__dirname, '../../frontend/public/images/educations');
+        const dir = path.join(__dirname, '../../../frontend/public/images/educations');
 
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
         cb(null, dir);
     },
     filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        const uniqueSuffix = Math.round(Math.random() * 1e9);
         const fileExt = path.extname(file.originalname).toLowerCase();
         cb(null, `${uniqueSuffix}${fileExt}`);
     },
@@ -38,13 +38,15 @@ const upload = multer({
 // **Create Education**
 const createEducation = async (req, res) => {
     const { title, description, quotes } = req.body;
+    const userId = req.userId;
+    const image_path = req.file ? `${req.file.filename}` : null;
     try {
         const newEducation = await Education.create({
             title,
             description,
             quotes,
-            createdBy: req.user.id, // Pastikan middleware autentikasi tersedia
-            image_path: req.file ? req.file.filename : null,
+            createdBy: userId, // Pastikan middleware autentikasi tersedia
+            image_path,
         });
         res.status(201).json({ message: 'Education created successfully', education: newEducation });
     } catch (error) {
@@ -128,7 +130,7 @@ const updateEducation = async (req, res) => {
 
         if (req.file) {
             const newImagePath = req.file.filename;
-            const dir = path.join(__dirname, '../../frontend/public/images/educations');
+            const dir = path.join(__dirname, '../../../frontend/public/images/educations');
 
             if (education.image_path) {
                 const oldImagePath = path.join(dir, education.image_path);

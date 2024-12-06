@@ -58,7 +58,7 @@ const Edukasi = () => {
             <EduCard
               key={edu.id}
               title={edu.title}
-              imageUrl={edu.imagePath ? `/images/${edu.imagePath}` : '/images/e1.png'}
+              imageUrl={edu.imagePath ? `/images/educations/${edu.imagePath}` : '/images/e1.png'}
               date={new Date(edu.createdAt).toLocaleDateString('id-ID', {
                 year: 'numeric',
                 month: 'long',
