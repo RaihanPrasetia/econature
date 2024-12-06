@@ -112,32 +112,29 @@ const getPengaduanById = async (req, res) => {
 };
 
 // **Update Pengaduan**
-const updatePengaduan = async (req, res) => {
-    const { id } = req.params;
-    const { name, email, jenis_sampah, no_handphone, alamat, description } = req.body;
-
-    const image_path = req.file ? `/images/pengaduan/${req.file.filename}` : null; // Path gambar baru jika ada
+const updatePengaduanStatus = async (req, res) => {
+    const { id } = req.params; // Mengambil ID pengaduan dari parameter URL
+    const { status } = req.body; // Mengambil status baru dari body request
 
     try {
+        // Mencari pengaduan berdasarkan ID
         const pengaduan = await Pengaduan.findByPk(id);
         if (!pengaduan) {
             return res.status(404).json({ message: 'Pengaduan not found' });
         }
 
-        pengaduan.name = name || pengaduan.name;
-        pengaduan.email = email || pengaduan.email;
-        pengaduan.jenis_sampah = jenis_sampah || pengaduan.jenis_sampah;
-        pengaduan.image_path = image_path || pengaduan.image_path;
-        pengaduan.no_handphone = no_handphone || pengaduan.no_handphone;
-        pengaduan.alamat = alamat || pengaduan.alamat;
-        pengaduan.description = description || pengaduan.description;
+        // Memperbarui status pengaduan
+        pengaduan.status = status;
 
+        // Menyimpan perubahan ke database
         await pengaduan.save();
-        res.status(200).json({ message: 'Pengaduan updated successfully', pengaduan });
+
+        res.status(200).json({ message: 'Pengaduan status updated successfully', pengaduan });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 // **Delete Pengaduan**
 const deletePengaduan = async (req, res) => {
@@ -159,7 +156,7 @@ module.exports = {
     createPengaduan,
     getPengaduan,
     getPengaduanById,
-    updatePengaduan,
+    updatePengaduanStatus,
     deletePengaduan,
     upload,
 };

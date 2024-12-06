@@ -58,10 +58,30 @@ const getPengaduanById = async (pengaduanId) => {
     }
 };
 
+const updatePengaduan = async (pengaduanId, formData) => {
+    try {
+        const response = await axios.put(`${apiUrl}/pengaduans/update/${pengaduanId}`, formData, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+        // Inisialisasi objek Bank menggunakan konstruktor
+        if (response.data && response.data.message && response.data.pengaduan) {
+            return new Pengaduan(response.data.pengaduan); // Mapping each payment response to the Payment model
+        } else {
+            throw new Error("No Education data found.");
+        }
+    } catch (error) {
+        console.error("Failed to fetch Education info:", error);
+        throw new Error(error.response?.data?.message || "Failed to fetch education info");
+    }
+}
+
 const PengaduanService = {
     createPengaduan,
     getPengaduan,
     getPengaduanById,
+    updatePengaduan,
 };
 
 export default PengaduanService;
