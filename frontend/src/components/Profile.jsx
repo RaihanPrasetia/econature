@@ -116,7 +116,7 @@ const Profile = () => {
                         type="text"
                         value={name || ""}
                         readOnly
-                        className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none"
+                        className="w-full bg-gray-100 px-3 py-2 rounded-md border border-gray-300 focus:outline-none"
                     />
                     <div className="flex items-center mb-4 mt-4">
                         <span className="text-gray-700">Jenis Kelamin</span>
@@ -125,16 +125,24 @@ const Profile = () => {
                         type="text"
                         value={jenis_kelamin || "Belum diisi"}
                         readOnly
-                        className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none"
+                        className="w-full bg-gray-100 px-3 py-2 rounded-md border border-gray-300 focus:outline-none"
                     />
                     <div className="flex items-center mb-4 mt-4">
                         <span className="text-gray-700">Tanggal Lahir</span>
                     </div>
                     <input
                         type="text"
-                        value={tanggal_lahir || "Belum diisi"}
+                        value={
+                            tanggal_lahir
+                                ? new Date(tanggal_lahir).toLocaleDateString("id-ID", {
+                                    day: "2-digit",
+                                    month: "long",
+                                    year: "numeric",
+                                })
+                                : "Belum diisi"
+                        }
                         readOnly
-                        className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none"
+                        className="w-full px-3 bg-gray-100 py-2 rounded-md border border-gray-300 focus:outline-none"
                     />
                     <div className="flex items-center mb-4 mt-4">
                         <span className="text-gray-700">Pekerjaan</span>
@@ -143,7 +151,7 @@ const Profile = () => {
                         type="text"
                         value={pekerjaan || "Belum diisi"}
                         readOnly
-                        className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none"
+                        className="w-full px-3 bg-gray-100 py-2 rounded-md border border-gray-300 focus:outline-none"
                     />
                     <div className="flex items-center mb-4 mt-4">
                         <span className="text-gray-700">Email</span>
@@ -152,7 +160,7 @@ const Profile = () => {
                         type="email"
                         value={email || ""}
                         readOnly
-                        className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none"
+                        className="w-full px-3 bg-gray-100 py-2 rounded-md border border-gray-300 focus:outline-none"
                     />
                     <div className="flex items-center mb-4 mt-4">
                         <span className="text-gray-700">Nomor Handphone</span>
@@ -161,7 +169,7 @@ const Profile = () => {
                         type="tel"
                         value={no_handphone || "Belum diisi"}
                         readOnly
-                        className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none"
+                        className="w-full bg-gray-100 px-3 py-2 rounded-md border border-gray-300 focus:outline-none"
                     />
                     <div className="flex items-center mb-4 mt-4">
                         <span className="text-gray-700">Alamat</span>
@@ -169,7 +177,7 @@ const Profile = () => {
                     <textarea
                         value={alamat || "Belum diisi"}
                         readOnly
-                        className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none resize-none h-24"
+                        className="w-full bg-gray-100 px-3 py-2 rounded-md border border-gray-300 focus:outline-none resize-none h-24"
                         rows={4}
                     ></textarea>
                 </div>
