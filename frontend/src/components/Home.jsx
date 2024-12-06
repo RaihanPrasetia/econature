@@ -1,66 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import NewsService from "../service/NewsService";
+import PengaduanService from '../service/PengaduanService';
 
-const complaints = [
-  {
-    id: 1,
-    date: '21 Mei, 2024',
-    title: 'Sampah yang menumpuk ditepi jalan',
-    location: 'Pekanbaru, Riau, Indonesia',
-    image: '/images/e1.png',
-    slug: 'LaporanPengguna1'
-  },
-  {
-    id: 2,
-    date: '20 Maret, 2024',
-    title: 'Sampah yang menumpuk dipembuangan sampah',
-    location: 'Tegal, Jawa Tengah, Indonesia',
-    image: '/images/e2.png',
-    slug: 'LaporanPengguna3'
-  },
-  {
-    id: 3,
-    date: '21 Januari, 2024',
-    title: 'Sampah yang menumpuk ditepi sungai',
-    location: 'Kota Jambi, Jambi, Indonesia',
-    image: '/images/e3.png',
-    slug: 'LaporanPengguna6'
-  }
-];
-
-const news = [
-
-  {
-    id: 1,
-    title: 'Pemulihan Terumbu Karang di Indonesia',
-    date: '29 Juli, 2024',
-    comments: '154 Komentar',
-    image: '/images/b4.png',
-    featured: true,
-    slug: 'Berita4'
-  },
-
-  {
-    id: 2,
-    title: 'Gerakan Menanam 1 Juta Pohon untuk Masa Depan Hijau',
-    date: '29 September, 2024',
-    image: '/images/masadepan.png',
-    slug: 'Berita6'
-  },
-  {
-    id: 3,
-    title: 'Indonesia Catat Rekor Suhu Tertinggi Akibat Pemanasan Global',
-    date: '25 Oktober, 2024',
-    image: '/images/b3.png',
-    slug: 'Berita3'
-  }
-];
 
 const donationAmounts = [
   5000, 10000, 25000, 50000, 75000, 100000, 200000
 ];
 
 const Home = () => {
+  const [newsData, setNewsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [pengaduans, setPengaduans] = useState([]); // State to store fetched data
+
+  useEffect(() => {
+    const fetchPengaduans = async () => {
+      try {
+        const data = await PengaduanService.getPengaduan();
+        setPengaduans(data);
+        console.log(data);
+        setIsLoading(false);
+      } catch (err) {
+        setError('Failed to fetch pengaduans');
+        setIsLoading(false);
+      }
+    };
+
+    fetchPengaduans();
+  }, []);
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        setIsLoading(true);
+        const response = await NewsService.getNewses(); // Panggil service API
+
+        setNewsData(response);
+        console.log(response)
+      } catch (err) {
+        setError(err.message || "Terjadi kesalahan saat memuat data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+
+  const handleToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div>
       <div className="relative bg-cover bg-center h-[600px]" style={{ backgroundImage: "url('/images/bg.jpg')" }}>
@@ -169,33 +160,44 @@ const Home = () => {
         <h2 className="text-[#222222] font-medium text-2xl mb-2">Laporkan Keluhan anda!</h2>
         <h1 className="text-4xl text-[#3B9E3F] font-bold">Pengaduan Econature</h1><br />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
-          {complaints.map((complaint) => (
-            <Link
-              key={complaint.id}
-              to={`/${complaint.slug}`}
-              className="block bg-gray-100 rounded-lg overflow-hidden transform shadow-sm transition-shadow duration-300 hover:scale-105 hover:shadow-xl"
-            >
-              <div className="relative h-48 bg-cover bg-center">
-                <img
-                  src={complaint.image}
-                  alt={complaint.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute bottom-0 w-full bg-black bg-opacity-50 text-white px-4 py-2">
-                  <div className="flex items-center space-x-2">
-                    <span>• {complaint.date}</span>
+          {isLoading ? (
+            <div className="col-span-3 text-center py-6">
+              <p className="text-gray-500 text-lg">Loading...</p>
+            </div>
+          ) : error ? (
+            <div className="col-span-3 text-center py-6">
+              <p className="text-red-500 text-lg">Terjadi kesalahan: {error}</p>
+            </div>
+          ) : (
+            pengaduans.map((pengaduan) => (
+              <Link
+                key={pengaduan.id}
+                onClick={handleToTop}
+                to={`/Pengaduan/${pengaduan.id}`}
+                className="block bg-gray-100 rounded-lg overflow-hidden transform shadow-sm transition-shadow duration-300 hover:scale-105 hover:shadow-xl"
+              >
+                <div className="relative h-48 bg-cover bg-center">
+                  <img
+                    src={pengaduan.imagePath ? `/images/${pengaduan.imagePath}` : `/images/p1.png`}
+                    alt={pengaduan.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-0 w-full bg-black bg-opacity-50 text-white px-4 py-2">
+                    <div className="flex items-center space-x-2">
+                      <span>• {pengaduan.formattedDate}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{complaint.title}</h3>
-                <div className="space-x-2">
-                  <i className="bi bi-geo-alt-fill text-[#689F38]"></i>
-                  <span className="text-gray-700">{complaint.location}</span>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{pengaduan.title}</h3>
+                  <div className="space-x-2">
+                    <i className="bi bi-geo-alt-fill text-[#689F38]"></i>
+                    <span className="text-gray-700">{pengaduan.alamat}</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          )}
         </div>
 
         <div className="flex justify-between items-center mb-6">
@@ -204,67 +206,84 @@ const Home = () => {
             <h1 className="text-4xl text-[#3B9E3F] font-bold">Informasi & Berita</h1>
           </div>
           <button className="bg-[#3B9E3F] text-white px-6 py-2 rounded-md hover:bg-green-700">
-            <a href="/Berita">
-              LEBIH LANJUT
-            </a>
+            <a href="/Berita">LEBIH LANJUT</a>
           </button>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-4">
-          <Link
-            to={`/${news[0].slug}`}
-            className="block bg-gray-100 rounded-lg overflow-hidden transform shadow-sm transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-          >
-            <div className="col-span-1 lg:col-span-1">
-              <div className="relative rounded-lg overflow-hidden shadow-md">
-                <img
-                  src={news[0].image}
-                  alt={news[0].title}
-                  className="w-full h-[410px] object-cover"
-                />
-                <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white p-4">
-                  <div className="flex items-center gap-4 text-sm">
-                    <div className='space-x-2'>
-                      <i class="bi bi-calendar text-[#689F38]"></i>
-                      <span>{news[0].date}</span>
-                    </div>
-                    <div className='space-x-2'>
-                      <i class="bi bi-chat-dots text-[#689F38]"></i>
-                      <span>{news[0].comments}</span>
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold">{news[0].title}</h3>
-                </div>
-              </div>
-            </div>
-          </Link>
 
-          <div className="col-span-1 lg:col-span-1 space-y-6">
-            {news.slice(1).map((item) => (
-              <div key={item.id} className="flex gap-4 bg-white rounded-lg overflow-hidden shadow-md">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-56 h-48 object-cover"
-                />
-                <div className="p-4 flex flex-col justify-between">
-                  <div>
-                    <div className='space-x-2'>
-                      <i class="bi bi-calendar text-[#689F38]"></i>
-                      <span className="text-sm text-gray-500">{item.date}</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-4">
+          {isLoading ? (
+            <div className="col-span-2 text-center py-6">
+              <p className="text-gray-500 text-lg">Loading...</p>
+            </div>
+          ) : error ? (
+            <div className="col-span-2 text-center py-6">
+              <p className="text-red-500 text-lg">Terjadi kesalahan: {error}</p>
+            </div>
+          ) : newsData.length > 0 ? (
+            <>
+              <Link
+                to={`/Berita/${newsData[0].id}`}
+                className="block bg-gray-100 rounded-lg overflow-hidden transform shadow-sm transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+              >
+                <div className="col-span-1 lg:col-span-1">
+                  <div className="relative rounded-lg overflow-hidden shadow-md">
+                    <img
+                      src={newsData[0].imagePath ? `/images/${newsData[0].imagePath}` : `/images/b1.png`}
+                      alt={newsData[0].title}
+                      className="w-full h-[410px] object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white p-4">
+                      <div className="flex items-center gap-4 text-sm">
+                        <div className="space-x-2">
+                          <i className="bi bi-calendar text-[#689F38]"></i>
+                          <span>{newsData[0].formattedCreatedAt}</span>
+                        </div>
+                        <div className="space-x-2">
+                          <i className="bi bi-chat-dots text-[#689F38]"></i>
+                          <span>{newsData[0].comments.length} Komentar</span>
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-bold">{newsData[0].title}</h3>
                     </div>
-                    <h3 className="font-bold mt-2 text-2xl">{item.title}</h3>
                   </div>
-                  <Link
-                    to={`/${item.slug}`}
-                    className="text-[#3B9E3F] hover:text-green-700 text-sm flex items-center gap-1 font-semibold"
-                  >
-                    BACA SELENGKAPNYA
-                  </Link>
                 </div>
+              </Link>
+
+              <div className="col-span-1 lg:col-span-1 space-y-6">
+                {newsData.slice(1, 3).map((item) => (
+                  <div key={item.id} className="flex gap-4 bg-white rounded-lg overflow-hidden shadow-md">
+                    <img
+                      src={item.imagePath ? `/images/${item.imagePath}` : `/images/b1.png`}
+                      alt={item.title}
+                      className="w-56 h-48 object-cover"
+                    />
+                    <div className="p-4 flex flex-col justify-between">
+                      <div>
+                        <div className="space-x-2">
+                          <i className="bi bi-calendar text-[#689F38]"></i>
+                          <span className="text-sm text-gray-500">{item.formattedCreatedAt}</span>
+                        </div>
+                        <h3 className="font-bold mt-2 text-2xl">{item.title}</h3>
+                      </div>
+                      <Link
+                        to={`/Berita/${item.id}`}
+                        className="text-[#3B9E3F] hover:text-green-700 text-sm flex items-center gap-1 font-semibold"
+                      >
+                        BACA SELENGKAPNYA
+                      </Link>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          ) : (
+            <div className="col-span-2 text-center py-6">
+              <p className="text-gray-500 text-lg">Tidak ada berita tersedia.</p>
+            </div>
+          )}
         </div>
+
+
       </div>
 
       <div className="bg-black text-white py-8 flex justify-center items-center">

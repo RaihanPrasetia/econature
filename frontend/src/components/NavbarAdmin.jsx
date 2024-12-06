@@ -49,12 +49,12 @@ function NavbarAdmin() {
             >
                 <FaNewspaper className="mr-3" /> Berita
             </a>
-            <a
+            <button
                 onClick={logout}
-                className="flex items-center gap-4 px-4 py-3 hover:bg-green-700 rounded-md"
+                className="flex items-center w-full gap-4 px-4 py-3 hover:bg-green-700 rounded-md"
             >
                 <FaSignOutAlt className="mr-3" /> Logout
-            </a>
+            </button>
         </nav>
     )
 }
