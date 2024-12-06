@@ -9,7 +9,8 @@ export default class Donation {
         payments = [],
         username,
         message,
-        avatar = null, // Pastikan ini adalah array
+        avatar = null,
+        comments = [],
     }) {
         this.id = id;
         this.title = title || "Tidak ada judul";
@@ -29,6 +30,19 @@ export default class Donation {
                 id: payment.from.id,
                 image_path: payment.from.image_path,
             } : null, // Jika 'from' tidak ada, beri nilai null
+        }));
+        this.comments = comments.map(comment => ({
+            id: comment.id,
+            title: comment.title || "Tidak ada judul",
+            message: comment.message || "Tidak ada pesan",
+            createdAt: new Date(comment.createdAt),
+            owner: comment.owner
+                ? {
+                    id: comment.owner.id,
+                    name: comment.owner.name || "Tidak ada nama",
+                    imagePath: comment.owner.image_path,
+                }
+                : null,
         }));
     }
 

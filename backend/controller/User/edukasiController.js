@@ -64,7 +64,7 @@ const getEducations = async (req, res) => {
             {
                 model: Comment,
                 as: 'comments', // Asosiasi antara Education dan User
-                attributes: ['id', 'title', 'message', 'createdAt'],
+                attributes: ['id', 'message', 'createdAt'],
                 include: [{
                     model: User,
                     as: 'owner',
@@ -94,7 +94,7 @@ const getEducationById = async (req, res) => {
             {
                 model: Comment,
                 as: 'comments', // Asosiasi antara Education dan User
-                attributes: ['id', 'title', 'message', 'createdAt'],
+                attributes: ['id', 'message', 'createdAt'],
                 include: [{
                     model: User,
                     as: 'owner',

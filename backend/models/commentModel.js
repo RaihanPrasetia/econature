@@ -3,6 +3,8 @@ const sequelize = require('../config/db');
 const User = require('./userModel');
 const News = require('./newsModel');
 const Education = require('./edukasiModel');
+const Donation = require('./donationModel');
+const Pengaduan = require('./pengaduanModel');
 
 const Comment = sequelize.define('Comment', {
     id: {
@@ -11,13 +13,19 @@ const Comment = sequelize.define('Comment', {
         primaryKey: true,
         type: DataTypes.INTEGER,
     },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     message: {
         type: DataTypes.TEXT,
         allowNull: false,
+    },
+    donation_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: Donation, // Pastikan tabel Users sudah ada
+            key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
     },
     news_id: {
         type: DataTypes.INTEGER,
@@ -34,6 +42,16 @@ const Comment = sequelize.define('Comment', {
         allowNull: true,
         references: {
             model: Education,
+            key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+    },
+    pengaduan_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: Pengaduan,
             key: 'id',
         },
         onUpdate: 'CASCADE',

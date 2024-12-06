@@ -10,10 +10,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       message: {
         type: Sequelize.TEXT,
         allowNull: false,
@@ -43,6 +39,16 @@ module.exports = {
         allowNull: true,
         references: {
           model: 'Educations',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      pengaduan_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Pengaduans',
           key: 'id',
         },
         onUpdate: 'CASCADE',

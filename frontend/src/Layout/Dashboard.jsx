@@ -3,7 +3,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import TentangKami from '../components/TentangKami'
 import Kontak from '../components/Kontak'
-import { Berita, DaftarPengaduan, Donasi, DonasiPage, Edukasi, KebijakanPrivasi, Pengaduan, Poin, Relawan } from '../components/features'
+import { Berita, DaftarPengaduan, Donasi, Edukasi, KebijakanPrivasi, Pengaduan, Poin, Relawan } from '../components/features'
 import Home from '../components/Home'
 import Error from '../components/Error'
 import PoinRiwayat from '../components/features/PoinRiwayat'
@@ -50,8 +50,6 @@ function Dashboard() {
                 <Route path="/poin-tukar-detail" element={<PoinTukarDetail />} />
                 <Route path="/Berita" element={<Berita />} />
                 <Route path="/Berita/:id" element={<DetailBerita />} />
-
-
             </Routes>
         </>
     )

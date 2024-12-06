@@ -1,4 +1,4 @@
-const { Donation, Payment, User } = require('../../associations'); // Pastikan ini sesuai dengan model Anda
+const { Donation, Payment, User, Comment } = require('../../associations'); // Pastikan ini sesuai dengan model Anda
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -97,6 +97,18 @@ const getDonationById = async (req, res) => {
                             attributes: ['id', 'image_path'],
                         },
                     ],
+                },
+                {
+                    model: Comment,
+                    as: 'comments', // Asosiasi antara Education dan User
+                    attributes: ['id', 'message', 'createdAt'],
+                    include: [{
+                        model: User,
+                        as: 'owner',
+                        attributes: ['id', 'name', 'image_path']
+
+
+                    }],
                 },
             ],
             attributes: ['id', 'title', 'description', 'donation_count', 'target', 'image_path', 'message', 'username', 'avatar'],

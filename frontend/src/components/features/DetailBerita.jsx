@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Person, Reply } from 'react-bootstrap-icons';
 import AsideDonatin from '../Donation/asideDonation';
 import NewsService from "../../service/NewsService";
+import CommentService from '../../service/CommentService';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const DetailBerita = () => {
     const { id } = useParams(); // Mendapatkan ID dari URL
     const [newsData, setNewsData] = useState(null);
     const [isLoading, setIsLoading] = useState(true); // Untuk loading state
-    const [error, setError] = useState(null); // Untuk menangani error
+    const [error, setError] = useState(null);
+    const [sendComment, setSendComment] = useState({
+        news_id: id,
+        message: ''
+    })
 
     useEffect(() => {
         const fetchNewsData = async () => {
@@ -37,6 +43,49 @@ const DetailBerita = () => {
     if (!newsData) {
         return <div>Berita tidak ditemukan.</div>;
     }
+
+    const handleCommentChange = (e) => {
+        setSendComment({
+            ...sendComment,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSendComment = async (e) => {
+        e.preventDefault();
+
+        // Validasi jika message kosong
+        if (!sendComment.message.trim()) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Komentar tidak boleh kosong!',
+                confirmButtonColor: '#3B9E3F',
+            });
+            return;
+        }
+
+        try {
+            await CommentService.createComment(sendComment); // Mengirim komentar
+            const response = await NewsService.getNewsById(id); // Refresh data berita
+            setNewsData(response);
+            setSendComment({ ...sendComment, message: '' }); // Reset form
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: 'Komentar Anda telah dikirim!',
+                confirmButtonColor: '#3B9E3F',
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Terjadi kesalahan saat mengirim komentar.',
+                confirmButtonColor: '#3B9E3F',
+            });
+            console.error("Error sending comment:", error);
+        }
+    };
 
     // Format tanggal berita
     const formattedDate = new Date(newsData.createdAt).toLocaleDateString('id-ID', {
@@ -138,26 +187,12 @@ const DetailBerita = () => {
 
                 <div className="lg:col-span-2 mb-8 mt-6">
                     <h2 className="text-2xl font-bold mb-6">Tinggalkan Komentar</h2>
-                    <form className="space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <input
-                                type="text"
-                                placeholder="Nama Lengkap"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                            />
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Subjek"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                            />
-                        </div>
+                    <form className="space-y-4" onSubmit={handleSendComment}>
                         <textarea
                             rows="6"
+                            name="message"
+                            value={sendComment.message}
+                            onChange={handleCommentChange}
                             placeholder="Komentar Anda"
                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                         </textarea>

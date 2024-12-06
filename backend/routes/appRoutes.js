@@ -13,6 +13,7 @@ const relawanRoutes = require('./User/relawanRoutes')
 const newsRoutes = require('./User/newsRoutes')
 const pengaduanRoutes = require('./User/pengaduanRoutes')
 const paymentRoutes = require('./User/paymentRoutes')
+const commentRoutes = require('./User/commentRoutes')
 
 router.use(authRouters);
 router.use(bankRouters);
@@ -25,5 +26,6 @@ router.use(relawanRoutes);
 router.use(newsRoutes);
 router.use(pengaduanRoutes);
 router.use(paymentRoutes);
+router.use(commentRoutes);
 
 module.exports = router;

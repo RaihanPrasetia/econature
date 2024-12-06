@@ -1,27 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [user] = useState(null);
+  const dropdownRef = useRef(null); // Referensi untuk dropdown
   const { isAuth, userName } = useAuth();
-
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(true);
+    setIsDropdownOpen((prev) => !prev);
   };
+
   const handleClose = () => {
     setIsDropdownOpen(false);
     window.scrollTo(0, 0);
   };
 
+  // Tutup dropdown ketika klik di luar elemen dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
 
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#1B5E20] px-4 py-4 flex justify-between items-center z-[5000]">
@@ -38,38 +50,33 @@ const Navbar = () => {
         <ul className="flex list-none gap-2 m-0 p-0">
           <li className="border-l border-white h-5 mx-2.5"></li>
           <li>
-            <Link to={isAuth ? '/home' : '/'}
-              onClick={handleClose}
-              className="hover:text-gray-300">
+            <Link to={isAuth ? '/home' : '/'} onClick={handleClose} className="hover:text-gray-300">
               BERANDA
             </Link>
           </li>
           <li className="border-l border-white h-5 mx-2.5"></li>
           <li>
-            <Link to="/tentang-kami"
-              onClick={handleClose}
-              className="hover:text-gray-300">
+            <Link to="/tentang-kami" onClick={handleClose} className="hover:text-gray-300">
               TENTANG KAMI
             </Link>
           </li>
           <li className="border-l border-white h-5 mx-2.5"></li>
           <li>
-            <Link to="/kontak"
-              onClick={handleClose}
-              className="hover:text-gray-300">
+            <Link to="/kontak" onClick={handleClose} className="hover:text-gray-300">
               KONTAK
             </Link>
           </li>
           <li className="border-l border-white h-5 mx-2.5"></li>
           {isAuth && (
-            <li className="relative">
+            <li className="relative" ref={dropdownRef}>
               <button
                 onClick={toggleDropdown}
                 className="flex items-center hover:text-gray-300 focus:outline-none"
               >
                 FITUR
                 <svg
-                  className={`ml-1 h-4 w-4 transform transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
+                  className={`ml-1 h-4 w-4 transform transition-transform ${isDropdownOpen ? 'rotate-180' : ''
+                    }`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -132,26 +139,22 @@ const Navbar = () => {
           )}
 
           <li className="border-l border-white h-5 mx-2.5"></li>
-          {isAuth || user ? (
-            <>
-              <Link
-                to="/profile"
-                className="flex items-center text-white cursor-pointer hover:underline text-lg font-medium"
-                onClick={handleClose}
+          {isAuth ? (
+            <Link
+              to="/profile"
+              className="flex items-center text-white cursor-pointer hover:underline text-lg font-medium"
+              onClick={handleClose}
+            >
+              <span>{userName}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 ml-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
               >
-                <span>{userName}</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 ml-2"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M10 10a4 4 0 100-8 4 4 0 000 8zM2 18a6 6 0 1116 0H2z"
-                  />
-                </svg>
-              </Link>
-            </>
+                <path d="M10 10a4 4 0 100-8 4 4 0 000 8zM2 18a6 6 0 1116 0H2z" />
+              </svg>
+            </Link>
           ) : (
             <>
               <li>

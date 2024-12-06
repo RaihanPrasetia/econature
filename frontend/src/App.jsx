@@ -13,19 +13,25 @@ import Error from './components/Error';
 import { useAuth } from './context/AuthContext';
 import Dashboard from './Layout/Dashboard';
 import AdminDashboard from './Layout/AdminDashboard';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
-function AppRoutes ()  {
+function AppRoutes() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const { isAuth, userRole } = useAuth();
   //console.log(isAuth, userRole);
- 
 
   useEffect(() => {
     setIsLoading(false); // Set loading to false directly if not mitra
-  }, [ userRole]);
+  }, [userRole]);
+  useEffect(() => {
+    if (userRole === 'admin') {
+      navigate('/admin/dashboard-admin');
+    }
+  }, [userRole, navigate]);
 
   if (isLoading) {
     return (
@@ -54,46 +60,46 @@ function AppRoutes ()  {
   }
   return (
 
-    
-      <div className="min-h-screen bg-white">
-        {userRole !== 'admin' &&  <Navbar/>}
-        <Routes>
+
+    <div className="min-h-screen bg-white">
+      {userRole !== 'admin' && <Navbar />}
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/masuk" element={<Login />} />
         <Route path="/daftar" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/tentang-kami" element={<TentangKami />} />
-            <Route path="/kontak" element={<Kontak />} />
-            <Route path="/error" element={<Error />} />
-          {isAuth ? (
-            <>
-              { userRole === 'user' && (
-                <>
-                  <Route path="*" element={<Dashboard />} />
-                  
+        <Route path="/kontak" element={<Kontak />} />
+        <Route path="/error" element={<Error />} />
+        {isAuth ? (
+          <>
+            {userRole === 'user' && (
+              <>
+                <Route path="*" element={<Dashboard />} />
 
-                </>
-              )}
-              { userRole === 'admin' && (
-                <>
-                 <Route path="/admin/*" element={<AdminDashboard/>} />
-                </>
-              )}
-            </>
-          ) : (
-            <>
-            
-            
+
+              </>
+            )}
+            {userRole === 'admin' && (
+              <>
+                <Route path="/admin/*" element={<AdminDashboard />} />
+              </>
+            )}
+          </>
+        ) : (
+          <>
+
+
             <Route path="*" element={<Navigate to="/" replace />} />
-            </>
-          )}
-                 
+          </>
+        )}
+
 
       </Routes>
       <Footer />
     </div>
-      
-    
+
+
   );
 };
 function App() {

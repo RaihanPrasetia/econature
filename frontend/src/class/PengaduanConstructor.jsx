@@ -12,6 +12,7 @@ export default class Pengaduan {
         status,
         createdAt,
         creator,
+        comments = [],
     }) {
         this.id = id;
         this.name = name || "Tidak ada nama";
@@ -33,7 +34,21 @@ export default class Pengaduan {
                 email: creator.email || "Tidak ada email",
                 imagePath: creator.image_path || null,
             }
-            : null; // Jika creator tidak ada, beri nilai null
+            : null;
+
+        this.comments = comments.map(comment => ({
+            id: comment.id,
+            title: comment.title || "Tidak ada judul",
+            message: comment.message || "Tidak ada pesan",
+            createdAt: new Date(comment.createdAt),
+            owner: comment.owner
+                ? {
+                    id: comment.owner.id,
+                    name: comment.owner.name || "Tidak ada nama",
+                    imagePath: comment.owner.image_path,
+                }
+                : null,
+        }));
     }
 
     /**

@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Comments', [
       {
-        title: 'Great Article!',
+
         message: 'I found this article very insightful and well-written.',
         news_id: 1, // Sesuaikan dengan ID berita yang ada di tabel News
         education_id: null, // Null karena komentar ini untuk berita
@@ -14,7 +14,6 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Helpful Content',
         message: 'This educational content really helped me understand the topic.',
         news_id: null, // Null karena komentar ini untuk edukasi
         education_id: 1, // Sesuaikan dengan ID edukasi yang ada di tabel Educations
@@ -23,7 +22,6 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Helpful Content',
         message: 'This educational content really helped me understand the topic.',
         news_id: null, // Null karena komentar ini untuk edukasi
         donation_id: 1, // Sesuaikan dengan ID edukasi yang ada di tabel Educations
@@ -32,7 +30,6 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Helpful Content',
         message: 'This educational content really helped me understand the topic.',
         news_id: null, // Null karena komentar ini untuk edukasi
         donation_id: 2,// Sesuaikan dengan ID edukasi yang ada di tabel Educations
@@ -41,7 +38,6 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Needs More Detail',
         message: 'The article is good, but it could use more examples.',
         news_id: 2, // Sesuaikan dengan ID berita yang ada di tabel News
         education_id: null,

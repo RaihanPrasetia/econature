@@ -1,4 +1,4 @@
-const { Pengaduan, User } = require('../../associations');  // Asosiasi model Pengaduan dan User
+const { Pengaduan, User, Comment } = require('../../associations');  // Asosiasi model Pengaduan dan User
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -85,6 +85,18 @@ const getPengaduanById = async (req, res) => {
                 model: User,
                 as: 'creator',
                 attributes: ['id', 'name', 'email', 'image_path'],
+            },
+            {
+                model: Comment,
+                as: 'comments', // Asosiasi antara News dan User
+                attributes: ['id', 'message', 'createdAt'],
+                include: [{
+                    model: User,
+                    as: 'owner',
+                    attributes: ['id', 'name', 'image_path']
+
+
+                }],
             }],
             attributes: ['id', 'name', 'email', 'jenis_sampah', 'image_path', 'no_handphone', 'alamat', 'description', 'status', 'provinsi', 'createdAt'],
         });
