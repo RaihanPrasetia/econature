@@ -7,12 +7,10 @@ const { Model } = require('sequelize');
 // Konfigurasi Multer untuk upload gambar
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const dir = path.join(__dirname, '../../frontend/public/images/donations');
-
+        const dir = path.join(__dirname, '../../../frontend/public/images/berita');
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }
-
         cb(null, dir);
     },
     filename: (req, file, cb) => {
@@ -38,14 +36,18 @@ const upload = multer({
 
 // **Create Donation**
 const createDonation = async (req, res) => {
-    const { title, description, target } = req.body;
+    const { title, description, target, username, message } = req.body;
+    const userId = req.userId
     try {
         const newDonation = await Donation.create({
             title,
             description,
             target,
-            createdBy: req.user.id, // Pastikan middleware autentikasi sudah diterapkan
-            image_path: req.file ? req.file.filename : null,
+            username,
+            message,
+            createdBy: userId, // Pastikan middleware autentikasi sudah diterapkan
+            image_path: req.files?.image_path?.[0]?.filename || null,
+            avatar: req.files?.avatar?.[0]?.filename || null,
         });
         res.status(201).json({ message: 'Donation created successfully', donation: newDonation });
     } catch (error) {
@@ -71,7 +73,7 @@ const getDonations = async (req, res) => {
                     ],
                 },
             ],
-            attributes: ['id', 'title', 'description', 'donation_count', 'target', 'image_path', 'message', 'username', 'avatar'],
+            attributes: ['id', 'title', 'description', 'donation_count', 'target', 'image_path', 'message', 'username', 'avatar', 'createdAt'],
         });
         res.status(200).json({ donations });
     } catch (error) {
@@ -128,37 +130,58 @@ const getDonationById = async (req, res) => {
 // **Update Donation**
 const updateDonation = async (req, res) => {
     const { id } = req.params;
-    const { title, description, target } = req.body;
+    const { title, description, target, username, message } = req.body;
     try {
         const donation = await Donation.findByPk(id);
         if (!donation) {
             return res.status(404).json({ message: 'Donation not found' });
         }
 
-        if (req.file) {
-            const newImagePath = req.file.filename;
-            const dir = path.join(__dirname, '../../frontend/public/images/donations');
+        // Update fields with the provided values or retain the existing values
+        donation.title = title || donation.title;
+        donation.username = username || donation.username; // Perbaiki: gunakan 'username' bukan 'title'
+        donation.message = message || donation.message; // Perbaiki: gunakan 'message' bukan 'title'
+        donation.description = description || donation.description;
+        donation.target = target || donation.target;
 
-            if (donation.image_path) {
-                const oldImagePath = path.join(dir, donation.image_path);
+        if (req.files) {
+            const dir = path.join(__dirname, '../../../frontend/public/images/donations');
+
+            // Cek dan hapus gambar lama jika ada
+            if (donation.image_path) { // Perbaiki: gunakan 'donation' bukan 'news'
+                const oldImagePath = path.join(dir, donation.image_path); // Perbaiki: gunakan 'donation' bukan 'news'
                 if (fs.existsSync(oldImagePath)) {
                     fs.unlinkSync(oldImagePath);
                 }
             }
 
-            donation.image_path = newImagePath;
+            // Jika ada file baru untuk gambar
+            if (req.files.image_path) {
+                donation.image_path = req.files.image_path[0].filename; // Perbaiki: gunakan 'donation' bukan 'news'
+            }
+
+            // Cek dan hapus avatar lama jika ada
+            if (donation.avatar) { // Perbaiki: gunakan 'donation' bukan 'news'
+                const oldAvatarPath = path.join(dir, donation.avatar); // Perbaiki: gunakan 'donation' bukan 'news'
+                if (fs.existsSync(oldAvatarPath)) {
+                    fs.unlinkSync(oldAvatarPath);
+                }
+            }
+
+            // Jika ada file baru untuk avatar
+            if (req.files.avatar) {
+                donation.avatar = req.files.avatar[0].filename; // Perbaiki: gunakan 'donation' bukan 'news'
+            }
         }
 
-        donation.title = title || donation.title;
-        donation.description = description || donation.description;
-        donation.target = target || donation.target;
-
+        // Simpan perubahan ke database
         await donation.save();
         res.status(200).json({ message: 'Donation updated successfully', donation });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 // **Delete Donation**
 const deleteDonation = async (req, res) => {

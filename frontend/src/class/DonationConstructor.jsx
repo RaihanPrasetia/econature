@@ -11,11 +11,13 @@ export default class Donation {
         message,
         avatar = null,
         comments = [],
+        createdAt,
     }) {
         this.id = id;
         this.title = title || "Tidak ada judul";
         this.description = description || "Tidak ada deskripsi";
         this.donationCount = donation_count;
+        this.createdAt = new Date(createdAt);
         this.target = target;
         this.imagePath = image_path;
         this.avatar = avatar;
@@ -52,6 +54,18 @@ export default class Donation {
      */
     get totalDonations() {
         return this.payments.reduce((total, payment) => total + payment.total, 0);
+    }
+
+    /**
+     * Properti terhitung untuk memformat tanggal pembuatan berita
+     * @returns {string}
+     */
+    get formattedCreatedAt() {
+        return this.createdAt.toLocaleDateString("id-ID", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        });
     }
 
     /**

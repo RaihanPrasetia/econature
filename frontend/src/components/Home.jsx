@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import NewsService from "../service/NewsService";
 import PengaduanService from '../service/PengaduanService';
 import { useAuth } from '../context/AuthContext';
+import EducationService from '../service/EducationService';
+
 
 
 const donationAmounts = [
@@ -11,6 +13,7 @@ const donationAmounts = [
 
 const Home = () => {
   const [newsData, setNewsData] = useState([]);
+  const [educationData, setEducationData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [pengaduans, setPengaduans] = useState([]);
@@ -31,6 +34,24 @@ const Home = () => {
 
     fetchPengaduans();
   }, []);
+
+  useEffect(() => {
+    const fetchEducations = async () => {
+      try {
+        setIsLoading(true);
+        const educations = await EducationService.getEducations();
+        setEducationData(educations);
+        console.log(educations)
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEducations();
+  }, []);
+
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -64,6 +85,14 @@ const Home = () => {
     }
     // Jika sudah autentikasi, arahkan ke halaman pengaduan
     return `/Berita/${id}`;
+  };
+  const handleNavigationEducation = (id) => {
+    if (!isAuth) {
+      // Jika belum autentikasi, arahkan ke halaman login
+      return "/masuk";
+    }
+    // Jika sudah autentikasi, arahkan ke halaman pengaduan
+    return `/Edukasi/${id}`;
   };
 
   const handleToTop = () => {
@@ -187,7 +216,7 @@ const Home = () => {
               <p className="text-red-500 text-lg">Terjadi kesalahan: {error}</p>
             </div>
           ) : (
-            pengaduans.map((pengaduan) => (
+            pengaduans.slice(0, 3).map((pengaduan) => (
               <Link
                 key={pengaduan.id}
                 onClick={handleToTop}
@@ -196,7 +225,7 @@ const Home = () => {
               >
                 <div className="relative h-48 bg-cover bg-center">
                   <img
-                    src={pengaduan.imagePath ? `/images/${pengaduan.imagePath}` : `/images/p1.png`}
+                    src={pengaduan.imagePath ? `/images/pengaduan/${pengaduan.imagePath}` : `/images/p1.png`}
                     alt={pengaduan.title}
                     className="w-full h-full object-cover"
                   />
@@ -247,7 +276,7 @@ const Home = () => {
                 <div className="col-span-1 lg:col-span-1">
                   <div className="relative rounded-lg overflow-hidden shadow-md">
                     <img
-                      src={newsData[0].imagePath ? `/images/${newsData[0].imagePath}` : `/images/b1.png`}
+                      src={newsData[0].imagePath ? `/images/berita/${newsData[0].imagePath}` : `/images/b1.png`}
                       alt={newsData[0].title}
                       className="w-full h-[410px] object-cover"
                     />
@@ -272,7 +301,7 @@ const Home = () => {
                 {newsData.slice(1, 3).map((item) => (
                   <div key={item.id} className="flex gap-4 bg-white rounded-lg overflow-hidden shadow-md">
                     <img
-                      src={item.imagePath ? `/images/${item.imagePath}` : `/images/b1.png`}
+                      src={item.imagePath ? `/images/berita/${item.imagePath}` : `/images/b1.png`}
                       alt={item.title}
                       className="w-56 h-48 object-cover"
                     />
@@ -327,57 +356,38 @@ const Home = () => {
         </div>
 
         <div className="grid w-full md:grid-cols-3 gap-12">
-
-          <div className='w-full bg-white shadow-lg rounded-lg hover:scale-105 hover:shadow-xl transform duration-300 cursor-pointer'>
-            <div className="h-[240px] relative ">
-              <img
-                src="/artikel/artikel1.png"
-                alt="artikel 1"
-                className="absolute w-full h-full object-cover bg-black bg-opacity-50 rounded-t-lg"
-              />
-              <div className="absolute bottom-0 left-0 w-full h-[180px] bg-gradient-to-t from-gray-800 to-transparent "></div>
-              <span className="text-white font-semibold absolute bottom-4 left-4">02 Oktober 2024</span>
-            </div>
-            <div className='w-full flex flex-col space-y-2 py-4 px-8'>
-              <span className='text-[24px] font-bold text-black text-center'>Pengenalan Dasar Plastik</span>
-              <span className='text-[18px] pl-6 font-semibold text-[#3B9E3F] '>Baca selengkapnya</span>
-            </div>
-          </div>
-
-          <div className='w-full bg-white shadow-lg rounded-lg hover:scale-105 hover:shadow-xl transform duration-300 cursor-pointer'>
-            <div className="h-[240px] relative">
-              <img
-                src="/artikel/artikel2.png"
-                alt="artikel 1"
-                className="absolute w-full h-full object-cover bg-black bg-opacity-50 rounded-t-lg"
-              />
-              <div className="absolute bottom-0 left-0 w-full h-[180px] bg-gradient-to-t from-gray-800 to-transparent "></div>
-              <span className="text-white font-semibold absolute bottom-4 left-4">02 Oktober 2024</span>
-            </div>
-            <div className='w-full flex flex-col space-y-2 py-4 px-8'>
-              <span className='text-[24px] font-bold text-black text-center'>Pengenalan Dasar Plastik</span>
-              <span className='text-[18px] pl-6 font-semibold text-[#3B9E3F] '>Baca selengkapnya</span>
-            </div>
-
-          </div>
-
-          <div className='w-full bg-white shadow-lg rounded-lg hover:scale-105 hover:shadow-xl transform duration-300 cursor-pointer'>
-            <div className="h-[240px] relative">
-              <img
-                src="/artikel/artikel3.png"
-                alt="artikel 1"
-                className="absolute w-full h-full object-cover bg-black bg-opacity-50 rounded-t-lg"
-              />
-              <div className="absolute bottom-0 left-0 w-full h-[180px] bg-gradient-to-t from-gray-800 to-transparent "></div>
-              <span className="text-white font-semibold absolute bottom-4 left-4">02 Oktober 2024</span>
-            </div>
-            <div className='w-full flex flex-col space-y-2 py-4 px-8'>
-              <span className='text-[24px] font-bold text-black text-center'>Pengenalan Dasar Plastik</span>
-              <span className='text-[18px]  font-semibold text-[#3B9E3F] '>Baca selengkapnya</span>
-            </div>
-
-          </div>
-
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>Error: {error}</p>
+          ) : (
+            educationData.slice(0, 3).map((education) => (
+              <div
+                key={education.id}
+                className="w-full bg-white shadow-lg rounded-lg hover:scale-105 hover:shadow-xl transform duration-300"
+              >
+                <div className="h-[240px] relative">
+                  <img
+                    src={education.imagePath ? `/images/educations/${education.imagePath}` : `/images/e1.png`}
+                    alt="artikel 1"
+                    className="absolute w-full h-full object-cover bg-black bg-opacity-50 rounded-t-lg"
+                  />
+                  <div className="absolute bottom-0 left-0 w-full h-[180px] bg-gradient-to-t from-gray-800 to-transparent "></div>
+                  <span className="text-white font-semibold absolute bottom-4 left-4">{education.formattedDate}</span>
+                </div>
+                <div className='w-full flex flex-col space-y-2 py-4 px-8'>
+                  <span className='text-[24px] font-bold text-black line-clamp-1'>{education.title}</span>
+                  <Link
+                    onClick={handleToTop}
+                    to={handleNavigationEducation(education.id)}
+                    className="text-[#3B9E3F] hover:text-green-700 px-4  text-lg flex items-center gap-1 font-semibold"
+                  >
+                    BACA SELENGKAPNYA
+                  </Link>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

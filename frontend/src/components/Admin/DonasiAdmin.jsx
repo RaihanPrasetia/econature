@@ -3,6 +3,7 @@ import { FaBell, FaUser, FaHandHoldingHeart } from 'react-icons/fa';
 import NavbarAdmin from '../NavbarAdmin';
 import PaymentService from '../../service/PaymentService';
 import Swal from 'sweetalert2';
+import TabelDonasi from './TabelDonasi';
 
 const DonasiAdmin = () => {
   const [donationData, setDonationData] = useState([]);
@@ -252,6 +253,8 @@ const DonasiAdmin = () => {
             </tbody>
           </table>
         </div>
+
+        <TabelDonasi />
       </div>
     </div>
   );
