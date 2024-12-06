@@ -33,6 +33,29 @@ const upload = multer({
     },
 });
 
+const updatePaymentStatus = async (req, res) => {
+    const { id } = req.params; // Mengambil ID pengaduan dari parameter URL
+    const { status } = req.body; // Mengambil status baru dari body request
+
+    try {
+        // Mencari pengaduan berdasarkan ID
+        const payment = await Payment.findByPk(id);
+        if (!payment) {
+            return res.status(404).json({ message: 'Pengaduan not found' });
+        }
+
+        // Memperbarui status payment
+        payment.status = status;
+
+        // Menyimpan perubahan ke database
+        await payment.save();
+
+        res.status(200).json({ message: 'Payment status updated successfully', payment });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 // **Create Payment**
 const createPayment = async (req, res) => {
     const { total, name, email, no_handphone, message, bank_id, donation_id } = req.body;
@@ -202,5 +225,6 @@ module.exports = {
     getPaymentById,
     updatePayment,
     deletePayment,
+    updatePaymentStatus,
     upload,
 };
