@@ -136,32 +136,6 @@ const DetailEdukasi = () => {
                             </div>
                         )}
 
-                        {/* Galeri */}
-                        <div>
-                            <h1 className="text-2xl font-bold mb-6">Galeri</h1>
-                            <div className="grid md:grid-cols-4 gap-4 mb-12">
-                                <img
-                                    src="/images/f1.png"
-                                    alt="Volunteers cleaning"
-                                    className="rounded-lg w-[206px] h-[153px] object-cover"
-                                />
-                                <img
-                                    src="/images/f11.png"
-                                    alt="Plastic waste"
-                                    className="rounded-lg w-[206px] h-[153px] object-cover"
-                                />
-                                <img
-                                    src="/images/f111.png"
-                                    alt="Green produce"
-                                    className="rounded-lg w-[206px] h-[153px] object-cover"
-                                />
-                                <img
-                                    src="/images/f1111.png"
-                                    alt="Recycled basket"
-                                    className="rounded-lg w-[206px] h-[153px] object-cover"
-                                />
-                            </div>
-                        </div>
                         <div className="space-y-4">
                             <h2 className="text-2xl font-bold mb-2">Komentar pada Postingan</h2>
                             {educationData.comments.map((comment, index) => (
@@ -173,10 +147,7 @@ const DetailEdukasi = () => {
                                                 <h3 className="font-bold">{comment.owner.name}</h3>
                                                 <div className="flex items-center gap-4">
                                                     <span className="text-gray-500 text-sm">{new Date(comment.createdAt).toLocaleString()}</span>
-                                                    <button className="flex items-center text-green-600 hover:text-green-700">
-                                                        <Reply className="w-4 h-4 mr-1" />
-                                                        <span>Balas</span>
-                                                    </button>
+
                                                 </div>
                                             </div>
                                             <p className="text-gray-600">{comment.message}</p>
