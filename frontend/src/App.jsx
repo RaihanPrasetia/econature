@@ -6,13 +6,13 @@ import Home from './components/Home';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Register from './components/Register';
-import Reset from './components/Reset';
 import TentangKami from './components/TentangKami';
 import Kontak from './components/Kontak';
 import Error from './components/Error';
 import { useAuth } from './context/AuthContext';
 import Dashboard from './Layout/Dashboard';
 import AdminDashboard from './Layout/AdminDashboard';
+import ResetForm from './components/Reset';
 
 
 
@@ -61,7 +61,7 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/masuk" element={<Login />} />
         <Route path="/daftar" element={<Register />} />
-        <Route path="/reset" element={<Reset />} />
+        <Route path="/reset" element={<ResetForm />} />
         <Route path="/tentang-kami" element={<TentangKami />} />
         <Route path="/kontak" element={<Kontak />} />
         <Route path="/error" element={<Error />} />

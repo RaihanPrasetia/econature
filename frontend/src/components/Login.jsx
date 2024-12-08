@@ -88,16 +88,15 @@ const Login = () => {
                 placeholder="Masukkan kata sandi"
               />
             </div>
-            
-            
+
+
             {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
             {successMessage && <p className="text-green-500 mt-2">{successMessage}</p>}
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full py-2 text-white font-medium rounded-md ${
-                isLoading ? 'bg-gray-400' : 'bg-[#3B9E3F] hover:bg-green-700'
-              }`}
+              className={`w-full py-2 text-white font-medium rounded-md ${isLoading ? 'bg-gray-400' : 'bg-[#3B9E3F] hover:bg-green-700'
+                }`}
             >
               {isLoading ? 'Memuat...' : 'Login'}
             </button>
@@ -106,10 +105,10 @@ const Login = () => {
 
         <div className="mt-6 text-center space-y-2">
           <p className="text-[#000000] font-medium">
-            Belum punya akun?{" "} 
-              <span className="text-[#3B9E3F] font-medium hover:text-green-600">
-                <Link to="/daftar">Daftar disini</Link>
-              </span>
+            Belum punya akun?{" "}
+            <span className="text-[#3B9E3F] font-medium hover:text-green-600">
+              <Link to="/daftar">Daftar disini</Link>
+            </span>
           </p>
           <p className="text-[#3B9E3F] hover:text-green-600 font-medium">
             <Link to="/reset">Lupa Kata sandi?</Link>

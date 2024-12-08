@@ -224,6 +224,7 @@ const TentangKami = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
+                  required
                   placeholder="Nama"
                   className="w-[514px] h-[70px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
                 />
@@ -235,6 +236,7 @@ const TentangKami = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                   placeholder="Email"
                   className="w-[514px] h-[70px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
                 />
@@ -247,6 +249,7 @@ const TentangKami = () => {
                   value={formData.no_handphone}
                   onChange={handleChange}
                   placeholder="Nomor Handphone"
+                  required
                   className="w-[514px] h-[70px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
                 />
               </div>
@@ -258,14 +261,13 @@ const TentangKami = () => {
                   className="w-[514px] h-[70px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
                   value={formData.alamat}
                   onChange={handleChange}
+                  required
                 ></textarea>
               </div>
               <button
                 type="submit"
                 className="w-[514px] h-[70px] bg-[#3B9E3F] text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-200 mb-4">
-                <a href="/Relawan">
-                  DAFTAR
-                </a>
+                DAFTAR
               </button>
             </form>
           </div>

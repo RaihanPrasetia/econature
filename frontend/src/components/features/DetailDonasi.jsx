@@ -231,10 +231,7 @@ const DetailDonasi = () => {
                                                 <h3 className="font-bold">{comment.owner.name}</h3>
                                                 <div className="flex items-center gap-4">
                                                     <span className="text-gray-500 text-sm">{new Date(comment.createdAt).toLocaleString()}</span>
-                                                    <button className="flex items-center text-green-600 hover:text-green-700">
-                                                        <Reply className="w-4 h-4 mr-1" />
-                                                        <span>Balas</span>
-                                                    </button>
+
                                                 </div>
                                             </div>
                                             <p className="text-gray-600">{comment.message}</p>
