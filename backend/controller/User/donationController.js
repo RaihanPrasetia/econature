@@ -7,7 +7,7 @@ const { Model } = require('sequelize');
 // Konfigurasi Multer untuk upload gambar
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const dir = path.join(__dirname, '../../../frontend/public/images/berita');
+        const dir = path.join(__dirname, '../../../frontend/public/images/donasi');
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }
