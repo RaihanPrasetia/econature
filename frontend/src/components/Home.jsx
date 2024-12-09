@@ -112,7 +112,7 @@ const Home = () => {
             Kurangi plastik, tambahkan senyuman untuk Bumi kita!
           </p>
           <button className="bg-[#3B9E3F] text-white px-8 py-3 rounded-lg w-fit hover:bg-green-700">
-            <Link to="/daftar">
+            <Link to="/daftar" onClick={handleToTop}>
               MULAI
             </Link>
           </button>
@@ -340,7 +340,7 @@ const Home = () => {
             Bergabung dengan Econature untuk aksi nyata menjaga lingkungan, kumpulkan poin dan reward, serta nikmati acara edukatif dan acara eksklusif yang mendukung masa depan lebih hijau.
           </p>
           <button className="bg-[#3B9E3F] hover:bg-green-700 text-white font-bold py-3 px-6 rounded">
-            <Link to="/daftar">
+            <Link to="/daftar" onClick={handleToTop}>
               DAFTAR
             </Link>
           </button>

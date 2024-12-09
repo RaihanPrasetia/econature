@@ -169,7 +169,7 @@ const PengaduanAdmin = () => {
                             {pengaduans.map((pengaduan, index) => (
                                 <tr key={pengaduan.id} className="hover:bg-gray-50">
                                     <td className="px-4 py-2 border text-center">{index + 1}</td>
-                                    <td className="px-4 py-2 border line-clamp-2">{pengaduan.description}</td>
+                                    <td className="px-4 py-2 border">{pengaduan.description}</td>
                                     <td className="px-4 py-2 border text-center">{pengaduan.formattedDate}</td>
                                     <td className="px-4 py-2 border text-center">{pengaduan.name}</td>
                                     <td className="px-4 py-2 border text-center">
@@ -189,13 +189,13 @@ const PengaduanAdmin = () => {
                                             <>
                                                 <button
                                                     onClick={() => updateStatus(pengaduan.id, 'Selesai')}
-                                                    className="px-3 py-1 bg-green-500 text-white rounded-lg mr-2"
+                                                    className="px-3 py-1 bg-green-500 text-white rounded-lg mr-2    "
                                                 >
                                                     Selesai
                                                 </button>
                                                 <button
                                                     onClick={() => updateStatus(pengaduan.id, 'Ditolak')}
-                                                    className="px-3 py-1 bg-red-500 text-white rounded-lg"
+                                                    className="px-3 py-1 bg-red-500 text-white rounded-lg mt-2"
                                                 >
                                                     Ditolak
                                                 </button>

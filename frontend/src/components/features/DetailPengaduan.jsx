@@ -209,7 +209,7 @@ const DetailPengaduan = () => {
                                     <Link
                                         onClick={handleToTop}
                                         to="/DaftarPengaduan"
-                                        className="bg-[#3B9E3F] hover:bg-green-700 text-white px-6 py-2 rounded-md transition duration-300 uppercase text-sm font-semibold">
+                                        className="bg-[#3B9E3F] hover:bg-green-700 text-white px-6 py-3 rounded-md transition duration-300 uppercase text-medium font-semibold">
                                         Kembali Kedaftar Laporan Pengaduan
                                     </Link>
                                 </div>

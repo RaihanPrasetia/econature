@@ -128,7 +128,7 @@ function Kontak() {
               
               <button 
                 onClick={handleContactClick}
-                className="bg-[#3B9E3F] hover:bg-green-700 text-white font-medium px-8 py-3 rounded-lg transition-colors duration-200 inline-flex items-center group"
+                className="bg-[#3B9E3F] w-full text-center justify-center hover:bg-green-700 text-white font-medium px-8 py-3 rounded-lg transition-colors duration-200 inline-flex items-center group"
               >
                 HUBUNGI KAMI
               </button>

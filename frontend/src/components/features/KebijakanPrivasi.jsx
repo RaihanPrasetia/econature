@@ -51,7 +51,7 @@ const KebijakanPrivasi = () => {
     <>
       <button
         onClick={handlePrivacyClick}
-        className="text-green-500 hover:underline"
+        className="text-[#3B9E3F] hover:underline"
       >
         Layanan & Kebijakan Privasi
       </button>

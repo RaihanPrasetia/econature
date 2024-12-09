@@ -186,7 +186,7 @@ const PembayaranDonasiDetail = () => {
 
         <div className="flex items-center justify-center mt-6 mb-8">
           <button
-            className="bg-green-700 text-white px-6 py-2 rounded"
+            className="bg-[#3B9E3F] text-white px-6 py-2 rounded"
             onClick={() => setShowPopup(true)}
           >
             LANJUTKAN UNTUK BERDONASI

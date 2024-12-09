@@ -6,9 +6,6 @@ import PaymentService from '../../service/PaymentService';
 import RelawanService from '../../service/RelawanService';
 import PengaduanService from '../../service/PengaduanService';
 
-
-
-
 const Notification = ({ onClose }) => {
   return (
     <div className="fixed top-5 right-5 bg-green-600 text-white px-4 py-3 rounded-md shadow-md z-50">
@@ -86,10 +83,6 @@ const DashboardAdmin = () => {
 
   const [showNotification, setShowNotification] = useState(false);
 
-  const toggleNotification = () => {
-    setShowNotification(!showNotification);
-  };
-
   const closeNotification = () => {
     setShowNotification(false);
   };
@@ -126,14 +119,6 @@ const DashboardAdmin = () => {
           <a href="/admin/Dashboard" className="font-bold text-2xl text-[#3B9E3F]">
             EcoNature Admin
           </a>
-          <div className="flex items-center gap-4">
-            <button className="text-[#3B9E3F] hover:text-gray-700" onClick={toggleNotification}>
-              <FaBell className="text-2xl" />
-            </button>
-            <a href="/admin/ProfileAdmin" className="text-[#3B9E3F] hover:text-gray-700">
-              <FaUser className="text-2xl" />
-            </a>
-          </div>
         </nav>
 
         {/* Header */}
