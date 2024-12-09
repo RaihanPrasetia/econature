@@ -92,7 +92,7 @@ const PembayaranDonasiDetail = () => {
             {["5rb", "10rb", "25rb", "50rb", "75rb", "100rb", "150rb"].map((amount) => (
               <button
                 key={amount}
-                className={`bg-gray-200 text-gray-700 px-4 py-2 m-1 rounded ${selectedAmount === amount ? 'bg-green-700 text-white' : ''}`}
+                className={`bg-gray-200 text-gray-700 px-4 py-2 m-1 rounded ${selectedAmount === amount ? 'bg-green-500 text-white' : ''}`}
                 onClick={() => handleAmountSelect(amount)} // Allow switching between amounts
               >
                 {amount}

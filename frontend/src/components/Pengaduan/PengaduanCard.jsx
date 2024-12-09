@@ -1,4 +1,4 @@
-const PengaduanCard = ({ createdAt, description, alamat, imagePath, status, provinsi, jenisSampah, id }) => (
+const PengaduanCard = ({ createdAt, description, alamat, imagePath, status, provinsi, title, jenisSampah, id }) => (
     <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
         <div className="relative h-48">
             {/* Display image or fallback */}
@@ -15,7 +15,7 @@ const PengaduanCard = ({ createdAt, description, alamat, imagePath, status, prov
             </div>
         </div>
         <div className="p-4">
-            <h2 className="text-2xl font-bold mb-2 line-clamp-2 min-h-[68px]">{description}</h2>
+            <h2 className="text-2xl font-bold mb-2 line-clamp-2 min-h-[68px]">{title}</h2>
             <div className="flex items-start space-x-2">
                 <i className="bi bi-geo-alt-fill text-[#689F38]"></i>
                 <span className="text-gray-600">{alamat}</span>

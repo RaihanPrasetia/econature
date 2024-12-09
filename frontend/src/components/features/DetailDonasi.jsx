@@ -98,11 +98,11 @@ const DetailDonasi = () => {
 
         if (totalDonations >= target) {
             Swal.fire({
-                title: 'Jadilah Bagian dari Perubahan Hari Ini!',
-                text: 'Bersama kita bisa menciptakan dampak yang berarti\nProgram donasi ini telah berakhir\nLihat program donasi lainnya dan terus berbuat baik',
                 icon: 'info',
-                confirmButtonText: 'Tutup',
-                confirmButtonColor: '#888888'
+                title: 'Jadilah Bagian dari Perubahan Hari Ini!',
+                text: 'Bersama kita bisa menciptakan dampak yang berarti\nProgram donasi ini telah berakhir, tetapi semangat berbagi tetap berlanjut\nLihat program donasi lainnya dan terus berbuat baik',
+                confirmButtonText: 'Daftar Sekarang',
+                confirmButtonColor: '#3B9E3F'
             });
         } else {
             navigate(`/PembayaranDonasi/${id}`); // Melanjutkan ke halaman pembayaran
@@ -192,7 +192,7 @@ const DetailDonasi = () => {
                                         </button>
                                         <button
                                             className="px-6 py-2 bg-[#3B9E3F] text-white rounded-lg hover:bg-green-700 text-sm font-medium"
-                                            onClick={handleDonasiClick} 
+                                            onClick={handleDonasiClick}
                                         >
                                             DONASI
                                         </button>

@@ -70,8 +70,6 @@ function AppRoutes() {
             {userRole === 'user' && (
               <>
                 <Route path="*" element={<Dashboard />} />
-
-
               </>
             )}
             {userRole === 'admin' && (

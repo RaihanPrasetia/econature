@@ -9,6 +9,7 @@ const Pengaduan = () => {
     const [formData, setFormData] = useState({
         namaLengkap: '',
         email: '',
+        title: '',
         phone: '',
         foto: null,
         fotoPreview: '',
@@ -68,6 +69,7 @@ const Pengaduan = () => {
         // Creating FormData for file upload
         const submitData = new FormData();
         submitData.append('name', formData.namaLengkap);
+        submitData.append('title', formData.title);
         submitData.append('email', formData.email);
         submitData.append('no_handphone', formData.phone);
         submitData.append('image_path', formData.foto);
@@ -144,6 +146,13 @@ const Pengaduan = () => {
                                 className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                                 onChange={(e) => setFormData({ ...formData, namaLengkap: e.target.value })}
                                 value={formData.namaLengkap}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Judul Laporan"
+                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                value={formData.title}
                             />
                             <input
                                 type="email"
