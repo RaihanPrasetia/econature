@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import DonationService from "../../service/DonationService";
 import RelawanService from "../../service/RelawanService";
+import { Link } from "react-router-dom";
 
-
-const AsideDonatin = () => {
+const AsideDonation = () => {
     const [donationData, setDonationData] = useState(null); // Menyimpan data donasi yang akan ditampilkan
     const [isLoading, setIsLoading] = useState(true);         // Untuk loading state
     const [error, setError] = useState(null);
@@ -133,7 +133,11 @@ const AsideDonatin = () => {
                         <div className='ml-2'>Rp {donationData.target.toLocaleString()} <br /> Diperlukan</div>
                     </div>
                     <button className="w-full bg-[#3B9E3F] text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-colors">
-                        <a href={`/Donasi/${donationData.id}`}>DONASI SEKARANG</a>
+                        <Link
+                            to={`/Donasi/${donationData.id}`}
+                        >
+                            DONASI SEKARANG
+                        </Link>
                     </button>
                 </div>
             </div>
@@ -289,4 +293,4 @@ const AsideDonatin = () => {
     );
 };
 
-export default AsideDonatin;
+export default AsideDonation;

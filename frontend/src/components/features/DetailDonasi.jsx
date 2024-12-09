@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaFacebook, FaTwitter, FaGoogle, FaLinkedin, FaInstagram, FaYoutube, FaPinterest } from 'react-icons/fa';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import DonationService from "../../service/DonationService";
 import AsideDonatin from '../Donation/asideDonation';
 import Swal from 'sweetalert2';
@@ -18,6 +18,7 @@ const DetailDonasi = () => {
         donation_id: id,
         message: ''
     })
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDonations = async () => {
@@ -89,6 +90,25 @@ const DetailDonasi = () => {
         }
     };
 
+    const handleDonasiClick = async () => {
+        if (!donationData) return;
+
+        const totalDonations = donationData.payments.reduce((total, payment) => total + payment.total, 0);
+        const target = donationData.target;
+
+        if (totalDonations >= target) {
+            Swal.fire({
+                title: 'Jadilah Bagian dari Perubahan Hari Ini!',
+                text: 'Bersama kita bisa menciptakan dampak yang berarti\nProgram donasi ini telah berakhir\nLihat program donasi lainnya dan terus berbuat baik',
+                icon: 'info',
+                confirmButtonText: 'Tutup',
+                confirmButtonColor: '#888888'
+            });
+        } else {
+            navigate(`/PembayaranDonasi/${id}`); // Melanjutkan ke halaman pembayaran
+        }
+    };
+
     const { title, description, target, message, username, imagePath, payments } = donationData;
 
     // Hitung total donasi (asumsi donationCount * rata-rata donasi)
@@ -118,7 +138,7 @@ const DetailDonasi = () => {
             <div className="container mx-auto py-12 max-w-7xl px-4">
                 <div className="grid md:grid-cols-3 gap-8">
                     <div className="md:col-span-2">
-                        <div className="mb-12">
+                        <div className="mb-8">
                             <img
                                 src={`/images/${imagePath}` || "/images/d4.png"} // Tampilkan gambar default jika null
                                 alt={title}
@@ -170,8 +190,11 @@ const DetailDonasi = () => {
                                         <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm">
                                             50rb
                                         </button>
-                                        <button className="px-6 py-2 bg-[#3B9E3F] text-white rounded-lg hover:bg-green-700 text-sm font-medium">
-                                            <Link to={`/PembayaranDonasi/${id}`}>DONASI</Link>
+                                        <button
+                                            className="px-6 py-2 bg-[#3B9E3F] text-white rounded-lg hover:bg-green-700 text-sm font-medium"
+                                            onClick={handleDonasiClick} 
+                                        >
+                                            DONASI
                                         </button>
                                     </div>
                                 </div>
@@ -180,7 +203,7 @@ const DetailDonasi = () => {
                             <h2 className="text-3xl font-bold mb-3">Donasi Untuk {title}</h2>
                             <p className="text-gray-600 leading-relaxed mb-2">{description}</p>
 
-                            <div className="bg-gray-50 p-6 rounded-lg mb-7 mt-8">
+                            <div className="bg-gray-50 p-6 rounded-lg mb-7 mt-6">
                                 <div className="flex items-center gap-4">
                                     <img
                                         src="/images/r1.png"
@@ -195,7 +218,7 @@ const DetailDonasi = () => {
                             </div>
 
                             {/* Bagikan */}
-                            <div className="flex items-center space-x-2 mt-8">
+                            <div className="flex items-center space-x-2 mt-6">
                                 <p className="text-gray-600 font-semibold">Bagikan:</p>
                                 <Link to="#" className="text-[#3B5998] hover:text-gray-600">
                                     <FaFacebook size={24} />
@@ -269,4 +292,4 @@ const DetailDonasi = () => {
     );
 };
 
-export default DetailDonasi;
+export default DetailDonasi;

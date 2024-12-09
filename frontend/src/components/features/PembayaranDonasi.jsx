@@ -86,15 +86,14 @@ const PembayaranDonasiDetail = () => {
       </div>
 
       <div className="container max-w-6xl mx-auto p-6 mb-4">
-        <div className="">
+        <div className="mb-8">
           <h2 className="text-2xl font-bold">Jumlah Donasi</h2>
           <div className="flex mt-4">
             {["5rb", "10rb", "25rb", "50rb", "75rb", "100rb", "150rb"].map((amount) => (
               <button
                 key={amount}
-                className={`bg-gray-200 text-gray-700 px-4 py-2 m-1 rounded ${selectedAmount === amount ? 'bg-green-500 text-white' : ''}`}
-                onClick={() => handleAmountSelect(amount)}
-                disabled={formData.total !== ''} // Disable button if 'total' is already filled
+                className={`bg-gray-200 text-gray-700 px-4 py-2 m-1 rounded ${selectedAmount === amount ? 'bg-green-700 text-white' : ''}`}
+                onClick={() => handleAmountSelect(amount)} // Allow switching between amounts
               >
                 {amount}
               </button>
@@ -110,8 +109,8 @@ const PembayaranDonasiDetail = () => {
           </div>
         </div>
 
-        <div>
-          <h2 className="text-2xl font-bold mt-4">Pilih Bank Tujuan</h2>
+        <div className='mb-8'>
+          <h2 className="text-2xl font-bold">Pilih Bank Tujuan</h2>
           {isLoading && <p>Memuat data bank...</p>}
           {error && <p className="text-red-500">Terjadi kesalahan: {error}</p>}
 
@@ -145,7 +144,7 @@ const PembayaranDonasiDetail = () => {
           )}
         </div>
 
-        <div className="mt-8">
+        <div className="mb-8">
           <h2 className="text-2xl font-bold">Pesan Anda</h2>
           <textarea
             name="message"
@@ -155,7 +154,7 @@ const PembayaranDonasiDetail = () => {
           ></textarea>
         </div>
 
-        <div className="mt-8">
+        <div className="mb-8">
           <h2 className="text-2xl font-bold">Detail Donatur</h2>
           <div className="grid grid-cols-2 gap-4 mt-4">
             <input
@@ -203,13 +202,13 @@ const PembayaranDonasiDetail = () => {
               )}
               <div className="flex justify-between">
                 <button
-                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                  className="bg-[#BD081B] hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
                   onClick={handleCancelDonation}
                 >
                   TIDAK
                 </button>
                 <button
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-[#3B9E3F] hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                   onClick={handleConfirmDonation}
                 >
                   <Link to="/KonfirmasiPembayaran">YA</Link>

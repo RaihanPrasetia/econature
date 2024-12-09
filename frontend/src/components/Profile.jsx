@@ -200,7 +200,7 @@ const Profile = () => {
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                         <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4 shadow-md">
                             <div className="text-center">
-                                <BiCheckCircle className="text-[#3B9E3F] text-6xl mb-4" />
+                                <BiCheckCircle className="text-[#3B9E3F] text-6xl mb-4 items-center justify-center" />
                                 <h2 className="text-2xl font-bold mb-2">Apakah anda yakin untuk Keluar?</h2>
                                 <div className="flex justify-center mt-6">
                                     <button

@@ -125,7 +125,7 @@ const KonfirmasiPembayaran = () => {
             <div className="container max-w-6xl mx-auto p-6 mb-4">
                 <div className="flex justify-between items-center px-6 w-full min-h-[116px] mt-4 bg-white shadow-xl">
                     <span className="font-semibold text-[28px]"> Total Pembayaran</span>
-                    <span className="font-semibold text-[28px] text-[#66BB6A]"> {formData.total}</span>
+                    <span className="font-semibold text-[28px] text-[#3B9E3F]"> {formData.total}</span>
                 </div>
 
                 <div className="flex justify-between items-center px-6 w-full rounded-lg min-h-[116px] mt-4 bg-white shadow-xl">
@@ -136,11 +136,11 @@ const KonfirmasiPembayaran = () => {
                     <div className='flex space-x-8 justify-center items-center'>
                         <div className="flex flex-col border p-2 rounded-lg">
                             <span className="font-normal text-[20px]">No. Rekening</span>
-                            <span className="font-semibold text-[28px] text-[#66BB6A]">{no_rek}</span>
+                            <span className="font-semibold text-[28px] text-[#3B9E3F]">{no_rek}</span>
                         </div>
                         <div className="flex flex-col border p-2 rounded-lg">
                             <span className="font-normal text-[20px]">Atas Nama</span>
-                            <span className="font-semibold text-[28px] text-[#66BB6A]">{an}</span>
+                            <span className="font-semibold text-[28px] text-[#3B9E3F]">{an}</span>
                         </div>
                     </div>
 

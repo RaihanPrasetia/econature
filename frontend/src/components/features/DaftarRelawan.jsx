@@ -50,7 +50,7 @@ const DaftarRelawan = () => {
 
     return (
         <div className="min-h-screen bg-white">
-            <div className="relative h-96 overflow-hidden">
+            <div className="relative h-96 overflow-hidden mb-16">
                 <img
                     src="/images/header.jpg"
                     alt="Waterfall"
@@ -68,7 +68,7 @@ const DaftarRelawan = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 mt-16 max-w-6xl">
+            <div className="container mx-auto px-4 max-w-6xl">
                 <h2 className="text-2xl font-bold text-center mb-2 text-[#000000]">
                     Daftar Untuk Relawan
                 </h2>
@@ -135,12 +135,12 @@ const DaftarRelawan = () => {
                     </div>
                     <button
                         type="submit"
-                        className="w-full mt-6 mb-12 bg-[#3B9E3F] text-white py-2 px-4 rounded-lg hover:bg-green-700 transition"
+                        className="w-full mt-6 mb-20 bg-[#3B9E3F] text-white py-2 px-4 rounded-lg hover:bg-green-700 transition"
                     >
                         Daftar Sekarang
                     </button>
                 </form>
-            </div><br />
+            </div>
 
             {showConfirmPopup && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -152,13 +152,13 @@ const DaftarRelawan = () => {
                             <div className="flex justify-center gap-4">
                                 <button
                                     onClick={handleClosePopup}
-                                    className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                                    className="px-6 py-2 bg-[#BD081B] text-white rounded-lg hover:bg-red-700 transition-colors"
                                 >
                                     TIDAK
                                 </button>
                                 <button
                                     onClick={handleConfirmSubmit}
-                                    className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-700 transition-colors"
+                                    className="px-6 py-2 bg-[#3B9E3F] text-white rounded-lg hover:bg-green-700 transition-colors"
                                 >
                                     YA
                                 </button>

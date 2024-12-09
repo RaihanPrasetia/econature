@@ -43,7 +43,7 @@ const ResetForm = () => {
           Reset Kata Sandi Anda
         </h2>
         <p className="text-center text-[#000000] mb-6">
-          Kami akan mengirimkan kode ke email untuk mereset kata sandi anda
+          Dapatkan Dukungan, Pelajari Lebih Dalam Menuju Lingkungan Bersih
         </p>
 
         {message && (
@@ -67,7 +67,7 @@ const ResetForm = () => {
                   id="email"
                   type="email"
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="Masukkan email"
+                  placeholder="Masukkan alamat email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />

@@ -5,8 +5,6 @@ import PengaduanService from '../service/PengaduanService';
 import { useAuth } from '../context/AuthContext';
 import EducationService from '../service/EducationService';
 
-
-
 const donationAmounts = [
   5000, 10000, 25000, 50000, 75000, 100000, 200000
 ];
@@ -149,7 +147,7 @@ const Home = () => {
 
             </p>
             <button className="bg-[#3B9E3F] text-white px-6 py-2 rounded hover:bg-green-700">
-              <Link to="/tentang-kami">
+              <Link to="/tentang-kami" onClick={handleToTop}>
                 LEBIH LANJUT
               </Link>
             </button>
@@ -195,7 +193,7 @@ const Home = () => {
               </div>
             </div>
             <button className="w-full bg-[#3B9E3F] text-white py-3 rounded-md hover:bg-green-700 transition-colors font-medium">
-              <Link to="/donasi">
+              <Link to="/donasi" onClick={handleToTop}>
                 MULAI DONASI
               </Link>
             </button>
@@ -351,8 +349,8 @@ const Home = () => {
 
       <div className="max-w-7xl mx-auto p-6 mt-4 mb-16">
         <div className="text-left mb-12">
-          <h2 className=" font-medium text-2xl mb-2 text-[#3B9E3F]" >Artikel Pengetahuan</h2>
-          <h1 className="text-4xl text-[#222222] font-bold">Edukasi Econature</h1>
+          <h2 className=" font-medium text-2xl mb-2 text-[#222222]" >Artikel Pengetahuan</h2>
+          <h1 className="text-4xl text-[#3B9E3F] font-bold">Edukasi Econature</h1>
         </div>
 
         <div className="grid w-full md:grid-cols-3 gap-12">

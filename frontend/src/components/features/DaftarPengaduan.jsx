@@ -44,7 +44,7 @@ const DaftarPengaduan = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="relative h-96 overflow-hidden">
+      <div className="relative h-96 overflow-hidden mb-16">
         <img
           src="/images/header.jpg"
           alt="Waterfall"
@@ -62,9 +62,9 @@ const DaftarPengaduan = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 mt-8 max-w-7xl">
-        <h2 className="text-3xl font-bold mb-8">Daftar Laporan Pengaduan</h2>
-        <div className="flex justify-between mb-4">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <h2 className="text-3xl font-bold mb-6">Daftar Laporan Pengaduan</h2>
+        <div className="flex justify-between mb-2">
           <select
             className="p-2 border rounded w-[194px] h-[51px]"
             value={locationFilter}
@@ -135,7 +135,7 @@ const DaftarPengaduan = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 mt-4 max-w-7xl">
+      <div className="container mx-auto px-4 py-8 max-w-7xl mb-8">
         {loading ? (
           <div className="flex justify-center items-center">
             <div className="loader" />

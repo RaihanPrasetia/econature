@@ -41,11 +41,21 @@ const TentangKami = () => {
     }
   };
 
+  const handleContactUs = () => {
+    const email = 'support@econature.com'; 
+    const subject = 'Pertanyaan untuk EcoNature';
+    const body = 'Halo Tim EcoNature, ';
+
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    window.location.href = mailtoLink;
+  };
 
   const handleClosePopup = () => {
     setShowConfirmPopup(false);
     setShowStatusPopup(false);
   };
+
   const testimonials = [
     {
       id: 1,
@@ -116,7 +126,10 @@ const TentangKami = () => {
               dan program yang mendorong tindakan nyata dalam pelestarian alam. Bersama Econature,
               mari #PilihLestari untuk masa depan bumi yang lebih hijau dan lestari.
             </p>
-            <button className="bg-[#3B9E3F] hover:bg-green-700 text-white font-medium px-8 py-3 rounded-lg transition-colors duration-200 inline-flex items-center group">
+            <button 
+              onClick={handleContactUs} 
+              className="bg-[#3B9E3F] hover:bg-green-700 text-white font-medium px-8 py-3 rounded-lg transition-colors duration-200 inline-flex items-center group"
+            >
               HUBUNGI KAMI
             </button>
           </div>

@@ -130,7 +130,7 @@ const Pengaduan = () => {
                 </div>
             </div>
 
-            <div className="max-w-6xl mx-auto p-6 mb-12">
+            <div className="max-w-6xl mx-auto p-6 mb-14">
                 <h1 className="text-3xl font-bold mb-8 text-center">
                     Laporkan Sampah Menumpuk Dilingkungan Anda
                 </h1>

@@ -20,7 +20,6 @@ const NewsCard = ({ id, title, description, imagePath, createdAt, comments }) =>
             <div className="p-4 flex flex-col h-full">
                 <div className="relative pb-4">
                     <h2 className="text-2xl font-bold mt-3 ml-3">{title}</h2>
-                    <p className="text-gray-600 mt-2">{description}</p>
                 </div>
 
                 <div className="flex-grow"></div>

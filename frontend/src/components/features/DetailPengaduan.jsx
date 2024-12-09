@@ -97,7 +97,7 @@ const DetailPengaduan = () => {
     return (
         <div className="min-h-screen bg-white">
             {/* Header Section */}
-            <div className="relative h-96 overflow-hidden">
+            <div className="relative h-96 overflow-hidden mb-10">
                 <img
                     src="/images/header.jpg"
                     alt="Header Background"
@@ -116,7 +116,7 @@ const DetailPengaduan = () => {
             </div>
 
             {/* Main Content */}
-            <div className="container mx-auto py-12 max-w-7xl px-4 mt-8">
+            <div className="container mx-auto py-12 max-w-7xl px-4">
                 <div className="grid md:grid-cols-3 gap-8">
                     <div className="md:col-span-2">
                         {/* Image Section */}
@@ -193,7 +193,7 @@ const DetailPengaduan = () => {
 
                             <div className=" mx-auto bg-white">
                                 <div className="mb-8">
-                                    <h2 className="text-2xl font-bold mb-6">Foto Kondisi Sampah :</h2>
+                                    <h2 className="text-2xl font-bold mb-6 mt-8">Foto Kondisi Sampah :</h2>
                                     <div class="flex justify-center mb-8">
                                         <div class="relative">
                                             <img src={`/images/pengaduan/${imagePath}` || '/images/placeholder.png'}
@@ -204,7 +204,7 @@ const DetailPengaduan = () => {
                                     </div>
                                 </div>
 
-                                <div className="text-center mb-8">
+                                <div className="text-center mb-10">
                                     <Link
                                         onClick={handleToTop}
                                         to="/DaftarPengaduan"
@@ -238,7 +238,7 @@ const DetailPengaduan = () => {
                     {/* Sidebar */}
                     <AsideDonation />
                 </div>
-                <div className="lg:col-span-2 mb-8 mt-6">
+                <div className="lg:col-span-2 mb-8 mt-8">
                     <h2 className="text-2xl font-bold mb-6">Tinggalkan Komentar</h2>
                     <form className="space-y-4" onSubmit={handleSendComment}>
                         <textarea

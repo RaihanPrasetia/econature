@@ -27,7 +27,7 @@ const Donasi = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Bagian Header */}
-      <div className="relative h-96 overflow-hidden mb-12">
+      <div className="relative h-96 overflow-hidden mb-10">
         <img
           src="/images/header.jpg"
           alt="Waterfall"
@@ -57,7 +57,7 @@ const Donasi = () => {
           {donationData.map((donation) => (
             <div
               key={donation.id}
-              className="bg-white flex flex-col justify-between border rounded-lg overflow-hidden p-6"
+              className="bg-white flex flex-col justify-between border rounded-lg overflow-hidden p-6 mb-10"
             >
               <div className="mb-6">
                 <img

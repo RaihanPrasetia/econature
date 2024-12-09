@@ -98,7 +98,7 @@ const Login = () => {
               className={`w-full py-2 text-white font-medium rounded-md ${isLoading ? 'bg-gray-400' : 'bg-[#3B9E3F] hover:bg-green-700'
                 }`}
             >
-              {isLoading ? 'Memuat...' : 'Login'}
+              {isLoading ? 'Memuat...' : 'Masuk'}
             </button>
           </div>
         </form>

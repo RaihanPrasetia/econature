@@ -136,7 +136,7 @@ const DetailEdukasi = () => {
                             </div>
                         )}
 
-                        <div className="space-y-4">
+                        <div className="space-y-4 mt-8">
                             <h2 className="text-2xl font-bold mb-2">Komentar pada Postingan</h2>
                             {educationData.comments.map((comment, index) => (
                                 <div key={index} className="border-b border-gray-200">

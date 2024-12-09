@@ -96,7 +96,7 @@ const DetailBerita = () => {
 
     return (
         <div className="min-h-screen bg-white">
-            <div className="relative h-96 overflow-hidden">
+            <div className="relative h-96 overflow-hidden mb-10">
                 <img
                     src="/images/header.jpg"
                     alt="Waterfall"
@@ -114,14 +114,14 @@ const DetailBerita = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto py-12 max-w-7xl px-4 mt-8">
+            <div className="container mx-auto py-12 max-w-7xl px-4">
                 <div className="grid md:grid-cols-3 gap-8">
                     <div className="md:col-span-2">
-                        <div className="mb-8">
+                        <div className="mb-10">
                             <img
                                 src={`/images/berita/${newsData.imagePath}`} // Gambar berita
                                 alt={newsData.title}
-                                className="w-full rounded-lg mb-8"
+                                className="w-full rounded-lg mb-10"
                             />
                             <h2 className="text-3xl font-bold mb-3">{newsData.title}</h2>
                             <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
@@ -141,7 +141,7 @@ const DetailBerita = () => {
                             <p className="text-gray-600 leading-relaxed mb-2">{newsData.description}</p>
                         </div>
 
-                        <div className="bg-gray-50 p-6 rounded-lg mb-6">
+                        <div className="bg-gray-50 p-6 rounded-lg mb-10">
                             <div className="flex items-center gap-4">
                                 <img
                                     src={newsData.avatar ? `/images/berita/${newsData.avatar}` : "/images/user.jpg"}
