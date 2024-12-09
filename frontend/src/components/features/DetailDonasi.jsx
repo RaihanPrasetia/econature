@@ -109,7 +109,7 @@ const DetailDonasi = () => {
         }
     };
 
-    const { title, description, target, message, username, imagePath, payments } = donationData;
+    const { title, description, target, message, username, imagePath, payments, avatar } = donationData;
 
     // Hitung total donasi (asumsi donationCount * rata-rata donasi)
     const totalDonations = payments.reduce((total, payment) => total + payment.total, 0);
@@ -140,7 +140,7 @@ const DetailDonasi = () => {
                     <div className="md:col-span-2">
                         <div className="mb-8">
                             <img
-                                src={`/images/${imagePath}` || "/images/d4.png"} // Tampilkan gambar default jika null
+                                src={`/images/donasi/${imagePath}` || "/images/d4.png"} // Tampilkan gambar default jika null
                                 alt={title}
                                 className="w-full rounded-lg mb-6"
                             />
@@ -206,7 +206,7 @@ const DetailDonasi = () => {
                             <div className="bg-gray-50 p-6 rounded-lg mb-7 mt-6">
                                 <div className="flex items-center gap-4">
                                     <img
-                                        src="/images/r1.png"
+                                        src={`/images/donasi/${avatar}` || "/images/d4.png"}
                                         alt="Author"
                                         className="w-100 h-100 rounded-full object-cover"
                                     />

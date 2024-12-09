@@ -61,7 +61,7 @@ const Donasi = () => {
             >
               <div className="mb-6">
                 <img
-                  src={`/images/${donation.imagePath}` || "/images/d4.png"}
+                  src={`/images/donasi/${donation.imagePath}` || "/images/d4.png"}
                   alt={donation.title}
                   className="w-full mb-4"
                 />
