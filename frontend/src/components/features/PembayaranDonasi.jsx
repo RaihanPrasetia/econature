@@ -93,8 +93,7 @@ const PembayaranDonasiDetail = () => {
               <button
                 key={amount}
                 className={`bg-gray-200 text-gray-700 px-4 py-2 m-1 rounded ${selectedAmount === amount ? 'bg-green-500 text-white' : ''}`}
-                onClick={() => handleAmountSelect(amount)}
-                disabled={formData.total !== ''} // Disable button if 'total' is already filled
+                onClick={() => handleAmountSelect(amount)} // Allow switching between amounts
               >
                 {amount}
               </button>

@@ -39,6 +39,7 @@ const DetailPengaduan = () => {
     const {
         name,
         email,
+        title,
         noHandphone,
         provinsi,
         status,
@@ -137,7 +138,7 @@ const DetailPengaduan = () => {
                         </div>
 
                         <h1 className="text-3xl font-bold mb-6">
-                            {description.split(" ").slice(0, 5).join(" ")}...
+                            {title}
                         </h1>
 
                         {/* Detail Section */}

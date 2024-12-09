@@ -35,7 +35,7 @@ const upload = multer({
 
 // **Create Pengaduan**
 const createPengaduan = async (req, res) => {
-    const { name, email, jenis_sampah, no_handphone, alamat, description, provinsi } = req.body;
+    const { name, email, jenis_sampah, title, no_handphone, alamat, description, provinsi } = req.body;
 
     const userId = req.userId;  // Menyimpan ID User yang melakukan pengaduan
     const image_path = req.file ? `${req.file.filename}` : null;
@@ -44,6 +44,7 @@ const createPengaduan = async (req, res) => {
         const newPengaduan = await Pengaduan.create({
             name,
             email,
+            title,
             jenis_sampah,
             image_path,
             no_handphone,
@@ -68,7 +69,7 @@ const getPengaduan = async (req, res) => {
                 as: 'creator', // Asosiasi antara Pengaduan dan User
                 attributes: ['id', 'name', 'email', 'image_path'],
             }],
-            attributes: ['id', 'name', 'email', 'jenis_sampah', 'image_path', 'no_handphone', 'alamat', 'description', 'status', 'provinsi', 'createdAt'],
+            attributes: ['id', 'name', 'title', 'email', 'jenis_sampah', 'image_path', 'no_handphone', 'alamat', 'description', 'status', 'provinsi', 'createdAt'],
         });
         res.status(200).json({ pengaduans });
     } catch (error) {
@@ -98,7 +99,7 @@ const getPengaduanById = async (req, res) => {
 
                 }],
             }],
-            attributes: ['id', 'name', 'email', 'jenis_sampah', 'image_path', 'no_handphone', 'alamat', 'description', 'status', 'provinsi', 'createdAt'],
+            attributes: ['id', 'name', 'title', 'email', 'jenis_sampah', 'image_path', 'no_handphone', 'alamat', 'description', 'status', 'provinsi', 'createdAt'],
         });
 
         if (!pengaduan) {

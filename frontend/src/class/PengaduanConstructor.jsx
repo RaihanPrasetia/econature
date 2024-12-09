@@ -2,6 +2,7 @@ export default class Pengaduan {
     constructor({
         id,
         name,
+        title,
         email = "Tidak ada email",
         jenis_sampah = "Tidak ada jenis sampah",
         image_path = null,
@@ -17,6 +18,7 @@ export default class Pengaduan {
         this.id = id;
         this.name = name || "Tidak ada nama";
         this.email = email;
+        this.title = title;
         this.jenisSampah = jenis_sampah;
         this.provinsi = provinsi;
         this.status = status;
